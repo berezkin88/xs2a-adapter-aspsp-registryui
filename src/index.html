@@ -1,0 +1,75 @@
+@@include('template/head.html')
+@@include('template/header.html')
+
+<div class="main-container">
+    <div class="result-table">
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+                    <th class="mdl-data-table__cell--non-numeric">Id</th>
+                    <th class="mdl-data-table__cell--non-numeric">Bank Name</th>
+                    <th class="mdl-data-table__cell--non-numeric">BIC</th>
+                    <th class="mdl-data-table__cell--non-numeric">URL</th>
+                    <th class="mdl-data-table__cell--non-numeric">Adapter Id</th>
+                    <th>Bank Code</th>
+                    <th class="mdl-data-table__cell--non-numeric edit-cell"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr contenteditable="true">
+                    <td class="mdl-data-table__cell--non-numeric">c400eecb-d40b-4a0b-9a2b-176e24440541</td>
+                    <td class="mdl-data-table__cell--non-numeric">Unicredit Bank</td>
+                    <td class="mdl-data-table__cell--non-numeric">HYVEDEMMXXX</td>
+                    <td class="mdl-data-table__cell--non-numeric">https://api-sandbox.unicredit.de</td>
+                    <td class="mdl-data-table__cell--non-numeric">unicredit-adapter</td>
+                    <td>70020270</td>
+                    <td class="mdl-data-table__cell--non-numeric edit-cell">
+                        <button class="mdl-button mdl-js-button mdl-button--icon" id="edit">
+                            <i class="material-icons">edit</i>
+                        </button>
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary" id="update">
+                            <i class="material-icons">done</i>
+                        </button>
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--accent" id="delete">
+                            <i class="material-icons">close</i>
+                        </button>
+                        <div class="mdl-tooltip mdl-tooltip--top" data-mdl-for="edit">
+                            Edit
+                        </div>
+                        <div class="mdl-tooltip mdl-tooltip--top" data-mdl-for="update">
+                            Update
+                        </div>
+                        <div class="mdl-tooltip mdl-tooltip--top" data-mdl-for="delete">
+                            Delete
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="welcome-message" hidden>
+        <h1>Hey! There is nothing to display right now :(</h1>
+    </div>
+    <div class="add-button" id="add">
+        <button class="mdl-button mdl-js-button mdl-button--fab">
+            <i class="material-icons">
+                add
+            </i>
+        </button>
+        <div class="mdl-tooltip mdl-tooltip--top" data-mdl-for="add">
+            Add new Aspsp
+        </div>
+    </div>
+    <div class="export-button" id="export">
+        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab mdl-button--colored">
+            <i class="material-icons">
+                arrow_downward
+            </i>
+        </button>
+        <div class="mdl-tooltip mdl-tooltip--top" data-mdl-for="export">
+            Export all Aspsps
+        </div>
+    </div>
+</div>
+
+@@include('template/footer.html')

@@ -1,0 +1,55 @@
+\:root
+    box-sizing: border-box
+
+*
+    box-sizing: inherit
+    &::before,
+    &::after
+        box-sizing: inherit
+
+* + *
+    margin-top: 1.5em
+
+body
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: center
+    width: min-content
+    margin: 0 auto
+
+.main-container 
+  min-width: 76em
+
+.result-table
+    // display: none
+
+.welcome-message
+  text-align: center
+
+
+.material-icons
+    cursor: pointer
+    transition: opacity 0.5s
+    opacity: 0.4
+    z-index: 1
+
+.material-icons:hover
+    transition: opacity 0.5s
+    opacity: 1
+
+#update,
+#delete
+    display: none
+
+.add-button,
+.export-button
+    margin-right: 2em
+    float: right
+
+    // overriden MDL rules
+.mdl-button__ripple-container 
+  margin-top: 0
+
+.mdl-data-table 
+ width: 100%
