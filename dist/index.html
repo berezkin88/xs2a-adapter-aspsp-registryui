@@ -37,6 +37,28 @@
         </form>
     </div>
 </header>
+<div class="demo-layout-transparent mdl-layout mdl-js-layout">
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Aspsp Registry Manager</span>
+        <ul class="demo-list-icon mdl-list mdl-navigation">
+            <li class="mdl-list__item mdl-navigation__link">
+                <i class="material-icons">
+                    add
+                </i>
+                Add new Aspsp</li>
+            <li class="mdl-list__item mdl-navigation__link">
+                <i class="material-icons">
+                    arrow_downward
+                </i>
+                Export all indexes</li>
+            <li class="mdl-list__item mdl-navigation__link">
+                <i class="material-icons">
+                    arrow_upward
+                </i>
+                Import aspsps</li>
+        </ul>
+    </div>
+</div>
 
 <div class="main-container">
     <div class="result-table">
@@ -53,7 +75,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr contenteditable="true">
+                <tr>
                     <td class="mdl-data-table__cell--non-numeric">c400eecb-d40b-4a0b-9a2b-176e24440541</td>
                     <td class="mdl-data-table__cell--non-numeric">Unicredit Bank</td>
                     <td class="mdl-data-table__cell--non-numeric">HYVEDEMMXXX</td>
@@ -81,13 +103,41 @@
                         </div>
                     </td>
                 </tr>
+                <tr class="hidden">
+                    <td class="mdl-data-table__cell--non-numeric"></td>
+                    <td class="mdl-data-table__cell--non-numeric"></td>
+                    <td class="mdl-data-table__cell--non-numeric"></td>
+                    <td class="mdl-data-table__cell--non-numeric"></td>
+                    <td class="mdl-data-table__cell--non-numeric"></td>
+                    <td></td>
+                    <td class="mdl-data-table__cell--non-numeric edit-cell">
+                        <button class="mdl-button mdl-js-button mdl-button--icon" id="edit">
+                            <i class="material-icons">edit</i>
+                        </button>
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary" id="update">
+                            <i class="material-icons">done</i>
+                        </button>
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--accent" id="delete">
+                            <i class="material-icons">close</i>
+                        </button>
+                        <div class="mdl-tooltip mdl-tooltip--top" data-mdl-for="edit">
+                            Edit
+                        </div>
+                        <div class="mdl-tooltip mdl-tooltip--top" data-mdl-for="update">
+                            Update
+                        </div>
+                        <div class="mdl-tooltip mdl-tooltip--top" data-mdl-for="delete">
+                            Delete
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
     <div class="welcome-message" hidden>
         <h1>Hey! There is nothing to display right now :(</h1>
     </div>
-    <div class="add-button" id="add">
+    <!-- <div class="add-button" id="add">
         <button class="mdl-button mdl-js-button mdl-button--fab">
             <i class="material-icons">
                 add
@@ -106,7 +156,7 @@
         <div class="mdl-tooltip mdl-tooltip--top" data-mdl-for="export">
             Export all Aspsps
         </div>
-    </div>
+    </div> -->
 </div>
 
 <footer class="registry-footer">
