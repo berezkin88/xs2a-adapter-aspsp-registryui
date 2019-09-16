@@ -20,7 +20,7 @@
         <h1 class="registry-header">Aspsp Registry Manager</h1>
     </div>
     <div class="search">
-        <form action="" class="search-form">
+        <form class="search-form">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <label for="bank-name" class="mdl-textfield__label">Bank name</label>
                 <input class="mdl-textfield__input" type="text" name="bank-name" id="">
@@ -33,34 +33,51 @@
                 <label for="bank-code" class="mdl-textfield__label">Bank code</label>
                 <input class="mdl-textfield__input" type="text" name="bank-code" id="">
             </div>
-            <input class="mdl-button mdl-js-button" type="button" value="SEARCH">
+            <input class="mdl-button mdl-js-button button__padding-top" type="button" value="SEARCH" id="search_button" onclick="search(this);">
         </form>
     </div>
 </header>
-<div class="demo-layout-transparent mdl-layout mdl-js-layout">
+<div class="mdl-layout--fixed-drawer mdl-layout mdl-js-layout">
     <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Aspsp Registry Manager</span>
-        <ul class="demo-list-icon mdl-list mdl-navigation">
-            <li class="mdl-list__item mdl-navigation__link">
-                <i class="material-icons">
-                    add
-                </i>
-                Add new Aspsp</li>
-            <li class="mdl-list__item mdl-navigation__link">
-                <i class="material-icons">
-                    arrow_downward
-                </i>
-                Export all indexes</li>
-            <li class="mdl-list__item mdl-navigation__link">
-                <i class="material-icons">
-                    arrow_upward
-                </i>
-                Import aspsps</li>
-        </ul>
+        <span class="mdl-layout-title">Menu</span>
+        <nav class="mdl-navigatiion">
+            <div class="add-button" id="add">
+                <button class="mdl-button mdl-js-button mdl-button--fab">
+                    <i class="material-icons">
+                        add
+                    </i>
+                </button>
+                <div class="mdl-tooltip" data-mdl-for="add">
+                    Add new Aspsp
+                </div>
+            </div>
+            <div class="export-button" id="export">
+                <a href="http://localhost:8999/v1/aspsps/export" download="aspsps.csv">
+                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab mdl-button--colored">
+                        <i class="material-icons">
+                            arrow_downward
+                        </i>
+                    </button>
+                </a>
+                <div class="mdl-tooltip" data-mdl-for="export">
+                    Export all Aspsps
+                </div>
+            </div>
+            <div class="import-button" id="import">
+                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab mdl-button--primary" disabled>
+                    <i class="material-icons">
+                        arrow_upward
+                    </i>
+                </button>
+                <div class="mdl-tooltip" data-mdl-for="import">
+                    Sorry( Not implemeted yet
+                </div>
+            </div>
+        </nav>
     </div>
 </div>
 
-<div class="main-container">
+<main class="main-container">
     <div class="result-table">
         <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
             <thead>
@@ -137,6 +154,9 @@
     <div class="welcome-message" hidden>
         <h1>Hey! There is nothing to display right now :(</h1>
     </div>
+
+    <!-- No need with the side menu drawer -->
+
     <!-- <div class="add-button" id="add">
         <button class="mdl-button mdl-js-button mdl-button--fab">
             <i class="material-icons">
@@ -157,7 +177,8 @@
             Export all Aspsps
         </div>
     </div> -->
-</div>
+    
+</main>
 
 <footer class="registry-footer">
     <h6 class="footer-text">Golden Dimention. Made with </h6>
