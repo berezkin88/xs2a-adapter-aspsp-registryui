@@ -11,11 +11,7 @@ function search() {
     if (data[2].value !== "")
         url += "bankCode=" + data[2].value;
 
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", url, true);
-    xhr.onerror = function (e) {
-        console.error(xhr.statusText);
-    };
-    xhr.send(null);
-    console.log("success")
+    let output = fetch(url).then(response => response.json());
+
+    // TODO build table
 }

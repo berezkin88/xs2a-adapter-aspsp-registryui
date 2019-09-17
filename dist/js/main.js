@@ -2,7 +2,7 @@ setTimeout(function () {
     initGlobals();
     document.querySelector(".edit-cell>button.edit").addEventListener("click", function () { editButton(this) });
     document.querySelector(".edit-cell>button.update").addEventListener("click", function () { greenButton(this) });
-    document.querySelector(".edit-cell>button.delete").addEventListener("click", function () { deleteButton(this) });
+    document.querySelector(".edit-cell>button.delete").addEventListener("click", function () { redButton(this) });
     document.querySelector("#add>button").addEventListener("click", addRow);
 }, 0)
 
@@ -58,13 +58,9 @@ function search() {
     if (data[2].value !== "")
         url += "bankCode=" + data[2].value;
 
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", url, true);
-    xhr.onerror = function (e) {
-        console.error(xhr.statusText);
-    };
-    xhr.send(null);
-    console.log("success")
+    let output = fetch(url).then(response => response.json());
+
+    // TODO build table
 }
 function addRow() {
     let editId = "edit-";
@@ -84,6 +80,7 @@ function addRow() {
                 e.setAttribute("id", editId + COUNTER);
     
                 helper.setAttribute("data-mdl-for", editId + COUNTER);
+                editButton(e);
             }
     
             if (e.className.indexOf("update") > -1) {
@@ -98,7 +95,7 @@ function addRow() {
             if (e.className.indexOf("delete") > -1) {
                 let helper = e.parentNode.childNodes[11];
     
-                e.addEventListener("click", () => { deleteButton(e) })
+                e.addEventListener("click", () => { redButton(e) })
                 e.setAttribute("id", deleteId + COUNTER);
     
                 helper.setAttribute("data-mdl-for", deleteId + COUNTER);
@@ -129,6 +126,19 @@ function greenButton(e) {
         console.log("updated");
     }
 }
+
+function redButton(e) {
+    let tableRow = e.parentElement.parentElement;
+
+    if (tableRow.className) {
+        purgeRow(e);
+        console.log("row purged off");
+    } else {
+        deleteButton(e);
+        console.log("data deleted");
+    }
+}
+
 function editButton(e) {
     let editButton = e.parentNode.children[0];
     let updateOrSaveButton = e.parentNode.children[1];
@@ -162,27 +172,84 @@ function updateButton(e) {
     let updateOrSaveButton = e.parentNode.children[1];
     let deleteButton = e.parentNode.children[2];
 
-    //TODO add update request
+    let row = e.parentNode.parentNode;
 
-    if (editButton.style.display === "none") {
-        editButton.style.display = "inherit";
-        updateOrSaveButton.style.display = "none";
-        deleteButton.style.display = "none";
-        uneditableCells(e);
-    }
+    let uri = "http://localhost:8999/v1/aspsps/";
+
+    let id = "{\"id\": \"" + row.cells[0].textContent + "\",\n";
+    let bankName = "\"name\": \"" + row.cells[1].textContent + "\",\n";
+    let bic = "\"bic\": \"" + row.cells[2].textContent + "\",\n";
+    let url = "\"url\": \"" + row.cells[3].textContent + "\",\n";
+    let adapterId = "\"adapterId\": \"" + row.cells[4].textContent + "\",\n";
+    let bankCode = "\"bankCode\": \"" + row.cells[5].textContent + "\"}";
+
+    let rawData = id + bankName + bic + url + adapterId + bankCode;
+
+    console.log(rawData);
+
+    let data = JSON.parse(rawData);
+
+    fetch(uri, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: data
+    }).then(response => {
+        if (response.statusText === 200) {
+            if (editButton.style.display === "none") {
+                editButton.style.display = "inherit";
+                updateOrSaveButton.style.display = "none";
+                deleteButton.style.display = "none";
+                uneditableCells(e);
+            }
+        }
+    });
 }
 function saveButton(e) {
     let editButton = e.parentNode.children[0];
     let updateOrSaveButton = e.parentNode.children[1];
     let deleteButton = e.parentNode.children[2];
 
-    // TODO add create request
+    let row = e.parentNode.parentNode;
 
-    if (editButton.style.display === "none") {
-        editButton.style.display = "inherit";
-        updateOrSaveButton.style.display = "none";
-        deleteButton.style.display = "none";
-        uneditableCells(e);
-    }
+    let uri = "http://localhost:8999/v1/aspsps/";
+
+    let id = "{\"id\": \"" + row.cells[0].textContent + "\",\n";
+    let bankName = "\"name\": \"" + row.cells[1].textContent + "\",\n";
+    let bic = "\"bic\": \"" + row.cells[2].textContent + "\",\n";
+    let url = "\"url\": \"" + row.cells[3].textContent + "\",\n";
+    let adapterId = "\"adapterId\": \"" + row.cells[4].textContent + "\",\n";
+    let bankCode = "\"bankCode\": \"" + row.cells[5].textContent + "\"}";
+
+    let rawData = id + bankName + bic + url + adapterId + bankCode;
+
+    console.log(rawData);
+
+    let data = JSON.parse(rawData);
+
+    fetch(uri, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: data
+    }).then(response => {
+        if (response.statusText === 200) {
+            if (editButton.style.display === "none") {
+                editButton.style.display = "inherit";
+                updateOrSaveButton.style.display = "none";
+                deleteButton.style.display = "none";
+                uneditableCells(e);
+            }
+        }
+    });
 }
+
+function purgeRow(e) {
+    let tableRow = e.parentElement.parentElement;
+
+    tableRow.remove();
+}
+
 //# sourceMappingURL=main.js.map

@@ -1,12 +1,18 @@
-function addRow() {
+function buildRow(data) {
     let editId = "edit-";
     let updateId = "update-";
     let deleteId = "delete-";
 
     let clone = HIDDEN_ROW.cloneNode(true);
-    clone.cells[0].textContent = uuid();
     clone.removeAttribute("class");
-    clone.setAttribute("class", "new");
+    
+    clone.cells[0].textContent = data.id;
+    clone.cells[1].textContent = data.name;
+    clone.cells[2].textContent = data.bic;
+    clone.cells[3].textContent = data.url;
+    clone.cells[4].textContent = data.adapterId;
+    clone.cells[5].textContent = data.bankCode;
+
     clone.lastElementChild.childNodes.forEach(e => {
         if (e.className) {
             if (e.className.indexOf("edit") > -1) {
@@ -16,7 +22,6 @@ function addRow() {
                 e.setAttribute("id", editId + COUNTER);
     
                 helper.setAttribute("data-mdl-for", editId + COUNTER);
-                editButton(e);
             }
     
             if (e.className.indexOf("update") > -1) {

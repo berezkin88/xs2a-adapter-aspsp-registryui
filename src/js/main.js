@@ -7,7 +7,9 @@
 //=require addRowButton.js
 //=require UUIDGenerator.js
 //=require greenButton.js
+//=require redButton.js
 //=require editButton.js
 //=require deleteButton.js
 //=require updateButton.js
 //=require saveButton.js
+//=require purgeRow.js
