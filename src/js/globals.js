@@ -1,5 +1,4 @@
 function initGlobals() {
-    Window.editButton = document.querySelector("[id^='edit']");
-    Window.updateButton = document.querySelector("[id^='update']");
-    Window.deleteButton = document.querySelector("[id^='delete']");
+    window.HIDDEN_ROW = document.querySelector("tbody>tr.hidden");
+    window.COUNTER = 0;
 }
