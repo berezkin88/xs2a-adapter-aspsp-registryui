@@ -41,4 +41,8 @@ function addRow() {
     document.querySelector("table>tbody").appendChild(clone)
 
     COUNTER++;
+
+    if (HIDDEN_ROW.parentElement.parentElement.hidden) {
+        showTable();
+    }
 }

@@ -2,10 +2,18 @@ function greenButton(e) {
     let tableRow = e.parentElement.parentElement;
 
     if (tableRow.className) {
-        saveButton(e);
-        console.log("saved");
+        if (window.confirm("Are you sure an aspsp is built right?")) {
+            saveButton(e);
+            console.log("saved");
+        } else {
+            return;
+        }
     } else {
-        updateButton(e);
-        console.log("updated");
+        if (window.confirm("Are you sure you want to update the aspsp?")) {
+            updateButton(e);
+            console.log("updated");
+        } else {
+            toggleButtons(e);
+        }
     }
 }

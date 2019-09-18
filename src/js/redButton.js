@@ -5,7 +5,11 @@ function redButton(e) {
         purgeRow(e);
         console.log("row purged off");
     } else {
-        deleteButton(e);
-        console.log("data deleted");
+        if (window.confirm("You you sure you want to delete this aspsp record?")) {
+            deleteButton(e);
+            console.log("data deleted");
+        } else {
+            toggleButtons(e);
+        }
     }
 }

@@ -13,3 +13,5 @@
 //=require updateButton.js
 //=require saveButton.js
 //=require purgeRow.js
+//=require buildRow.js
+//=require showTable.js
