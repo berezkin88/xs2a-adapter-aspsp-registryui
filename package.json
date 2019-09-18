@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "UI for registry",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "readable-stream": "^3.4.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "@babel/preset-env": "^7.6.0",
@@ -44,7 +46,7 @@
       "img": "src/img/*.*"
     },
     "dist": {
-      "css": "dist/scc",
+      "css": "dist/css",
       "html": "dist",
       "js": "dist/js",
       "fonts": "dist/fonts",

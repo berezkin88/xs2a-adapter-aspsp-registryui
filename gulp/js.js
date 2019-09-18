@@ -5,6 +5,7 @@ var sourcemaps =    require('gulp-sourcemaps');
 var cnf =           require('../package.json').config;
 var babel =         require('gulp-babel');
 var include =       require("gulp-include");
+var uglify =        require('gulp-uglify');
  
 gulp.task('js', function () {
   return gulp.src(cnf.src.js)
@@ -15,6 +16,7 @@ gulp.task('js', function () {
     extensions: "js",
     hardFail: true
   }))
+  // .pipe(uglify())
   .pipe(sourcemaps.write('.')) 
   .pipe(gulp.dest(cnf.dist.js));
 });

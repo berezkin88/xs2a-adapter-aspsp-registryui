@@ -26,8 +26,13 @@ function saveButton(e) {
             'Content-Type': 'application/json'
         },
         body: data
+    }).then((response) => {
+        if (response.status !== 201) {
+            throw Error(response.statusText);
+        }
+        return response;
     }).then(response => {
-        if (response.statusText === 200) {
+        if (response.statusText === 201) {
             if (editButton.style.display === "none") {
                 editButton.style.display = "inherit";
                 updateOrSaveButton.style.display = "none";
@@ -35,5 +40,7 @@ function saveButton(e) {
                 uneditableCells(e);
             }
         }
+    }).catch(function (error) {
+        console.log(error);
     });
 }
