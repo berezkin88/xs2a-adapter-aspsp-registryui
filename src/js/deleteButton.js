@@ -2,14 +2,19 @@ function deleteButton(e) {
     let uuidCell = e.parentElement.parentElement.cells[0].innerText;
     let url = "http://localhost:8999/v1/aspsps/" + uuidCell;
 
-    var xhr = new XMLHttpRequest();
-    xhr.open("DELETE", url, true);
-    if (xhr.status === 204) {
+    fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then((response) => {
+        if (response.status !== 204) {
+            throw Error(response.statusText);
+        }
         purgeRow(e);
-    } else {
-        xhr.onerror = function (e) {
-            console.error(xhr.statusText);
-        };
-    }
-    xhr.send(null);
+        console.log("data deleted");
+        return response;
+    }).catch(function (error) {
+        console.log(error);
+    });
 }

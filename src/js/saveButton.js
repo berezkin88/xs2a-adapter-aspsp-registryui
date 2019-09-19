@@ -14,11 +14,9 @@ function saveButton(e) {
     let adapterId = "\"adapterId\": \"" + row.cells[4].textContent + "\",\n";
     let bankCode = "\"bankCode\": \"" + row.cells[5].textContent + "\"}";
 
-    let rawData = id + bankName + bic + url + adapterId + bankCode;
+    let data = id + bankName + bic + url + adapterId + bankCode;
 
-    console.log(rawData);
-
-    let data = JSON.parse(rawData);
+    console.log(data);
 
     fetch(uri, {
         method: 'POST',
@@ -30,9 +28,11 @@ function saveButton(e) {
         if (response.status !== 201) {
             throw Error(response.statusText);
         }
+        row.removeAttribute("class");
+        console.log("saved");
         return response;
     }).then(response => {
-        if (response.statusText === 201) {
+        if (response.status === 201) {
             if (editButton.style.display === "none") {
                 editButton.style.display = "inherit";
                 updateOrSaveButton.style.display = "none";

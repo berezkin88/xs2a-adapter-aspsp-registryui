@@ -14,11 +14,9 @@ function updateButton(e) {
     let adapterId = "\"adapterId\": \"" + row.cells[4].textContent + "\",\n";
     let bankCode = "\"bankCode\": \"" + row.cells[5].textContent + "\"}";
 
-    let rawData = id + bankName + bic + url + adapterId + bankCode;
+    let data = id + bankName + bic + url + adapterId + bankCode;
 
-    console.log(rawData);
-
-    let data = JSON.parse(rawData);
+    console.log(data);
 
     fetch(uri, {
         method: 'PUT',
@@ -30,6 +28,7 @@ function updateButton(e) {
         if (!response.ok) {
             throw Error(response.statusText);
         }
+        console.log("updated");
         return response;
     }).then(response => {
         if (response.ok) {
