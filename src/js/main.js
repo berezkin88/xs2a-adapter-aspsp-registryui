@@ -16,3 +16,4 @@
 //=require buildRow.js
 //=require showTable.js
 //=require clearTable.js
+//=require assembleRowData.js

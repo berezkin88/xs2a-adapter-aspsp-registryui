@@ -46,7 +46,7 @@ function search() {
     clearTable();
 
     let data = document.querySelector(".search-form");
-    let url = "http://localhost:8999/v1/aspsps/?";
+    let url = "/v1/aspsps/?";
 
     if (data[0].value !== "")
         url += "name=" + data[0].value + "&";
@@ -124,7 +124,6 @@ function addRow() {
 }
 
 function uuid() {
-  console.log("generating uuid...");
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
       var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
@@ -154,7 +153,6 @@ function redButton(e) {
 
     if (tableRow.className) {
         purgeRow(e);
-        console.log("row purged off");
     } else {
         if (window.confirm("You you sure you want to delete this aspsp record?")) {
             deleteButton(e);
@@ -179,7 +177,7 @@ function editButton(e) {
 
 function deleteButton(e) {
     let uuidCell = e.parentElement.parentElement.cells[0].innerText;
-    let url = "http://localhost:8999/v1/aspsps/" + uuidCell;
+    let url = "/v1/aspsps/" + uuidCell;
 
     fetch(url, {
         method: 'DELETE',
@@ -191,7 +189,6 @@ function deleteButton(e) {
             throw Error(response.statusText);
         }
         purgeRow(e);
-        console.log("data deleted");
         return response;
     }).catch(function (error) {
         console.log(error);
@@ -199,45 +196,20 @@ function deleteButton(e) {
 }
 
 function updateButton(e) {
-    let editButton = e.parentNode.children[0];
-    let updateOrSaveButton = e.parentNode.children[1];
-    let deleteButton = e.parentNode.children[2];
-
-    let row = e.parentNode.parentNode;
-
-    let uri = "http://localhost:8999/v1/aspsps/";
-
-    let id = "{\"id\": \"" + row.cells[0].textContent + "\",\n";
-    let bankName = "\"name\": \"" + row.cells[1].textContent + "\",\n";
-    let bic = "\"bic\": \"" + row.cells[2].textContent + "\",\n";
-    let url = "\"url\": \"" + row.cells[3].textContent + "\",\n";
-    let adapterId = "\"adapterId\": \"" + row.cells[4].textContent + "\",\n";
-    let bankCode = "\"bankCode\": \"" + row.cells[5].textContent + "\"}";
-
-    let data = id + bankName + bic + url + adapterId + bankCode;
-
-    console.log(data);
-
-    fetch(uri, {
+    fetch("/v1/aspsps/", {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: data
+        body: assembleRowData(e)
     }).then((response) => {
         if (!response.ok) {
             throw Error(response.statusText);
         }
-        console.log("updated");
         return response;
     }).then(response => {
         if (response.ok) {
-            if (editButton.style.display === "none") {
-                editButton.style.display = "inherit";
-                updateOrSaveButton.style.display = "none";
-                deleteButton.style.display = "none";
-                uneditableCells(e);
-            }
+            toggleButtons(e);
         }
     }).catch(function (error) {
         console.log(error);
@@ -245,46 +217,21 @@ function updateButton(e) {
 }
 
 function saveButton(e) {
-    let editButton = e.parentNode.children[0];
-    let updateOrSaveButton = e.parentNode.children[1];
-    let deleteButton = e.parentNode.children[2];
-
-    let row = e.parentNode.parentNode;
-
-    let uri = "http://localhost:8999/v1/aspsps/";
-
-    let id = "{\"id\": \"" + row.cells[0].textContent + "\",\n";
-    let bankName = "\"name\": \"" + row.cells[1].textContent + "\",\n";
-    let bic = "\"bic\": \"" + row.cells[2].textContent + "\",\n";
-    let url = "\"url\": \"" + row.cells[3].textContent + "\",\n";
-    let adapterId = "\"adapterId\": \"" + row.cells[4].textContent + "\",\n";
-    let bankCode = "\"bankCode\": \"" + row.cells[5].textContent + "\"}";
-
-    let data = id + bankName + bic + url + adapterId + bankCode;
-
-    console.log(data);
-
-    fetch(uri, {
+    fetch("/v1/aspsps/", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: data
+        body: assembleRowData(e)
     }).then((response) => {
         if (response.status !== 201) {
             throw Error(response.statusText);
         }
         row.removeAttribute("class");
-        console.log("saved");
         return response;
     }).then(response => {
         if (response.status === 201) {
-            if (editButton.style.display === "none") {
-                editButton.style.display = "inherit";
-                updateOrSaveButton.style.display = "none";
-                deleteButton.style.display = "none";
-                uneditableCells(e);
-            }
+            toggleButtons(e);
         }
     }).catch(function (error) {
         console.log(error);
@@ -363,4 +310,16 @@ function clearTable() {
     }
 }
 
+function assembleRowData(e) {
+    let row = e.parentNode.parentNode;
+
+    let id = "{\"id\": \"" + row.cells[0].textContent + "\",\n";
+    let bankName = "\"name\": \"" + row.cells[1].textContent + "\",\n";
+    let bic = "\"bic\": \"" + row.cells[2].textContent + "\",\n";
+    let url = "\"url\": \"" + row.cells[3].textContent + "\",\n";
+    let adapterId = "\"adapterId\": \"" + row.cells[4].textContent + "\",\n";
+    let bankCode = "\"bankCode\": \"" + row.cells[5].textContent + "\"}";
+
+    return id + bankName + bic + url + adapterId + bankCode;
+}
 //# sourceMappingURL=main.js.map
