@@ -1,6 +1,6 @@
 function deleteButton(e) {
     let uuidCell = e.parentElement.parentElement.cells[0].innerText;
-    let url = "http://localhost:8999/v1/aspsps/" + uuidCell;
+    let url = "/v1/aspsps/" + uuidCell;
 
     fetch(url, {
         method: 'DELETE',

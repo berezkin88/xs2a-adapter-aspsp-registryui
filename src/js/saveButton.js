@@ -5,7 +5,7 @@ function saveButton(e) {
 
     let row = e.parentNode.parentNode;
 
-    let uri = "http://localhost:8999/v1/aspsps/";
+    let uri = "/v1/aspsps/";
 
     let id = "{\"id\": \"" + row.cells[0].textContent + "\",\n";
     let bankName = "\"name\": \"" + row.cells[1].textContent + "\",\n";

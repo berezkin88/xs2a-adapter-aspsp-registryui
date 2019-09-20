@@ -2,7 +2,7 @@ function search() {
     clearTable();
 
     let data = document.querySelector(".search-form");
-    let url = "http://localhost:8999/v1/aspsps/?";
+    let url = "/v1/aspsps/?";
 
     if (data[0].value !== "")
         url += "name=" + data[0].value + "&";
