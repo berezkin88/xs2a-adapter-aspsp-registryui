@@ -29,7 +29,6 @@ function saveButton(e) {
             throw Error(response.statusText);
         }
         row.removeAttribute("class");
-        console.log("saved");
         return response;
     }).then(response => {
         if (response.status === 201) {

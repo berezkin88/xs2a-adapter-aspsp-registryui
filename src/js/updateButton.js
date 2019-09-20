@@ -28,7 +28,6 @@ function updateButton(e) {
         if (!response.ok) {
             throw Error(response.statusText);
         }
-        console.log("updated");
         return response;
     }).then(response => {
         if (response.ok) {

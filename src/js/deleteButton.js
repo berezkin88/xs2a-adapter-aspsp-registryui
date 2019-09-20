@@ -12,7 +12,6 @@ function deleteButton(e) {
             throw Error(response.statusText);
         }
         purgeRow(e);
-        console.log("data deleted");
         return response;
     }).catch(function (error) {
         console.log(error);
