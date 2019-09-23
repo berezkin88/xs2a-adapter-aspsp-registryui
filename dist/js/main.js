@@ -1,9 +1,12 @@
 setTimeout(function () {
     initGlobals();
     document.querySelector("#add>button").addEventListener("click", addRow);
+    document.querySelector("#import>button").addEventListener("click", () => FILE_UPLOAD_FIELD.click());
+    FILE_UPLOAD_FIELD.addEventListener("change", upload);
 }, 0)
 
 function initGlobals() {
+    window.FILE_UPLOAD_FIELD = document.querySelector("#import-field");
     window.HIDDEN_ROW = document.querySelector("tbody>tr.hidden");
     window.COUNTER = 0;
 }
@@ -217,6 +220,8 @@ function updateButton(e) {
 }
 
 function saveButton(e) {
+    let row = e.parentElement.parentElement;
+
     fetch("/v1/aspsps/", {
         method: 'POST',
         headers: {
@@ -322,4 +327,16 @@ function assembleRowData(e) {
 
     return id + bankName + bic + url + adapterId + bankCode;
 }
+function upload() {
+    let file = FILE_UPLOAD_FIELD.files[0];
+    let data = new FormData();
+
+    data.append("data", file);
+
+    fetch("/v1/aspsps/import", {
+        method: 'POST',
+        body: data
+    }).catch(error => console.log(error))
+}
+
 //# sourceMappingURL=main.js.map

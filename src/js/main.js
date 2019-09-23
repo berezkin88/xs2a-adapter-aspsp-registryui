@@ -17,3 +17,4 @@
 //=require showTable.js
 //=require clearTable.js
 //=require assembleRowData.js
+//=require upload.js
