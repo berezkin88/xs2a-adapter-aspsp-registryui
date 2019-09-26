@@ -3,6 +3,7 @@ setTimeout(function () {
     document.querySelector("#add>button").addEventListener("click", addRow);
     document.querySelector("#import>button").addEventListener("click", () => FILE_UPLOAD_FIELD.click());
     FILE_UPLOAD_FIELD.addEventListener("change", upload);
+    document.querySelectorAll(".mdl-textfield__input").forEach(field => field.addEventListener('keypress', event => onEnterPress(event)));
 }, 0)
 
 function initGlobals() {
@@ -338,6 +339,18 @@ function upload() {
         method: 'POST',
         body: data
     }).catch(error => console.log(error))
+}
+
+function onEnterPress(event) {
+    if (event.keyCode === 13) {
+        search();
+    }
+}
+
+function clearContent() {
+    clearTable();
+
+    document.querySelectorAll(".mdl-textfield__input").forEach(element => {element.value = ""; element.parentElement.classList.remove("is-dirty")});
 }
 
 //# sourceMappingURL=main.js.map

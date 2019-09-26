@@ -18,3 +18,5 @@
 //=require clearTable.js
 //=require assembleRowData.js
 //=require upload.js
+//=require onEnterPress.js
+//=require clear.js
