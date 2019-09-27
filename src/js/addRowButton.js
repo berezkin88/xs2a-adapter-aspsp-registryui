@@ -42,7 +42,7 @@ function addRow() {
 
     COUNTER++;
 
-    if (HIDDEN_ROW.parentElement.parentElement.hidden) {
+    if (HIDDEN_ROW.parentElement.parentElement.parentElement.hidden) {
         showTable();
     }
 }

@@ -10,26 +10,21 @@
 * + *
     margin-top: 1.5em
 
-body
-    display: flex
-    flex-direction: column
-    justify-content: space-between
-    align-items: center
-    width: max-content
-    margin: 0 auto
-
-.main-container 
-  min-width: 76em
+.main-container
+    min-width: 76em
+    max-width: 93vw
+    flex: 2 1 auto
 
 .result-table
-    // display: none
+    border: rgba(0,0,0,.3) 1px solid
+    max-width: 100%
+    overflow-x: scroll
 
 .hidden
     display: none
 
 .welcome-message
-  text-align: center
-
+    text-align: center
 
 .material-icons
     cursor: pointer
@@ -45,9 +40,28 @@ body
 [id^='delete']
     display: none
 
-    // overriden MDL rules
-.mdl-button__ripple-container 
-  margin-top: 0
+.approaches
+    display: grid
+    grid-template: "EMBEDDED REDIRECT" "DECOUPLED OAUTH"
+    grid-column-gap: 0
+    grid-row-gap: 0
+    justify-items: left
 
-.mdl-data-table 
- width: 100%
+#embedded
+    margin: 0
+
+#redirect
+    margin: 0
+
+#decoupled
+    margin: 0
+
+#oauth
+    margin: 0
+
+    // overriden MDL rules
+.mdl-button__ripple-container
+    margin-top: 0
+
+.mdl-data-table
+    width: 100%

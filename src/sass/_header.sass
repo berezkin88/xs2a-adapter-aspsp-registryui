@@ -1,9 +1,18 @@
 .registry-header
     margin: 1em
+    flex: 1 1 auto
 
 h1
     &.registry-header
         text-align: center
+
+.flex-containder
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: center
+    margin: 0 auto
+    min-height: 96vh
 
 // overriding mdl rules
 .mdl-layout__obfuscator,
@@ -11,14 +20,31 @@ h1
 .mdl-layout__obfuscator,
 .mdl-layout__container,
     margin-top: 0
-    z-index: -1
+    position: inherit
+    width: inherit
+    flex: 0 0 0
 
-.mdl-layout__drawer 
-    width: 6rem
+.mdl-layout__drawer
     align-items: center
+    position: fixed
+    border-radius: 4rem
+    width: inherit
+    height: inherit
+    top: 1rem
+    left: 3rem
+    box-shadow: 0 -1px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12)
+    background: #f7f7f7
 
-.mdl-layout__drawer>.mdl-layout-title 
+
+.mdl-layout__drawer>.mdl-layout-title
     padding-left: 0
 
 .button__padding-top
     padding-top: 0.1rem
+
+.mdl-navigatiion
+    margin: 1.5em 1em
+
+.mdl-layout 
+    width: unset
+    height: unset

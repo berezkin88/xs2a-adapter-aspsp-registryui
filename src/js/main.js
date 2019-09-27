@@ -20,3 +20,5 @@
 //=require upload.js
 //=require onEnterPress.js
 //=require clear.js
+//=require failureMessage.js
+//=require successMessage.js

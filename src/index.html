@@ -2,44 +2,67 @@
 @@include('template/header.html')
 
 <main class="main-container">
-    <div class="result-table">
-        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" hidden>
+    <div class="result-table" hidden>
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
             <thead>
                 <tr>
-                    <th class="mdl-data-table__cell--non-numeric">Id</th>
+                    <th class="mdl-data-table__cell--non-numeric text-align__right">Id</th>
                     <th class="mdl-data-table__cell--non-numeric">Bank Name</th>
                     <th class="mdl-data-table__cell--non-numeric">BIC</th>
                     <th class="mdl-data-table__cell--non-numeric">URL</th>
                     <th class="mdl-data-table__cell--non-numeric">Adapter Id</th>
                     <th>Bank Code</th>
+                    <th class="mdl-data-table__cell--non-numeric">IDP URL</th>
+                    <th class="mdl-data-table__cell--non-numeric text-align__right">Approach</th>
                     <th class="mdl-data-table__cell--non-numeric edit-cell"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="hidden">
+                    <td class="mdl-data-table__cell--non-numeric text-align__right"></td>
                     <td class="mdl-data-table__cell--non-numeric"></td>
                     <td class="mdl-data-table__cell--non-numeric"></td>
                     <td class="mdl-data-table__cell--non-numeric"></td>
                     <td class="mdl-data-table__cell--non-numeric"></td>
                     <td class="mdl-data-table__cell--non-numeric"></td>
                     <td></td>
+                    <td class="mdl-data-table__cell--non-numeric text-align__right">
+                        <div class="approaches">
+                            <div id="embedded">
+                                <input type="checkbox" name="EMBEDDED" disabled>
+                                <label for="EMBEDDED">EMBEDDED</label>
+                            </div>
+                            <div id="redirect">
+                                <input type="checkbox" name="REDIRECT" disabled>
+                                <label for="EMBEDDED">REDIRECT</label>
+                            </div>
+                            <div id="decoupled">
+                                <input type="checkbox" name="DECOUPLED" disabled>
+                                <label for="EMBEDDED">DECOUPLED</label>
+                            </div>
+                            <div id="oauth">
+                                <input type="checkbox" name="OAUTH" disabled>
+                                <label for="EMBEDDED">OAUTH</label>
+                            </div>
+                        </div>
+                    </td>
                     <td class="mdl-data-table__cell--non-numeric edit-cell">
-                        <button class="mdl-button mdl-js-button mdl-button--icon edit" >
+                        <button class="mdl-button mdl-js-button mdl-button--icon edit">
                             <i class="material-icons">edit</i>
                         </button>
-                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary update" >
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary update">
                             <i class="material-icons">done</i>
                         </button>
-                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--accent delete" >
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--accent delete">
                             <i class="material-icons">close</i>
                         </button>
-                        <div class="mdl-tooltip mdl-tooltip--top" >
+                        <div class="mdl-tooltip mdl-tooltip--top">
                             Edit
                         </div>
-                        <div class="mdl-tooltip mdl-tooltip--top" >
+                        <div class="mdl-tooltip mdl-tooltip--top">
                             Save / Update
                         </div>
-                        <div class="mdl-tooltip mdl-tooltip--top" >
+                        <div class="mdl-tooltip mdl-tooltip--top">
                             Delete
                         </div>
                     </td>
@@ -48,8 +71,8 @@
         </table>
     </div>
     <div class="welcome-message">
-        <h1>Hey! There is nothing to display right now :(</h1>
-    </div>    
+        <h1>Adapter team wishes you good luck!<br> Nothing to display right now.</h1>
+    </div>
 </main>
 
 @@include('template/footer.html')
