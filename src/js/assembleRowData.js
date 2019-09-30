@@ -3,7 +3,7 @@ function assembleRowData(e) {
 
     let object = {};
     object.id = row.cells[0].textContent;
-    object.bankName = row.cells[1].textContent;
+    object.name = row.cells[1].textContent;
     object.bic = row.cells[2].textContent;
     object.url = row.cells[3].textContent;
     object.adapterId = row.cells[4].textContent;
