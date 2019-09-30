@@ -1,16 +1,17 @@
 function assembleRowData(e) {
     let row = e.parentNode.parentNode;
 
-    let id = "{\"id\": \"" + row.cells[0].textContent + "\",\n";
-    let bankName = "\"name\": \"" + row.cells[1].textContent + "\",\n";
-    let bic = "\"bic\": \"" + row.cells[2].textContent + "\",\n";
-    let url = "\"url\": \"" + row.cells[3].textContent + "\",\n";
-    let adapterId = "\"adapterId\": \"" + row.cells[4].textContent + "\",\n";
-    let bankCode = "\"bankCode\": \"" + row.cells[5].textContent + "\",\n";
-    let idpUrl = "\"idpUrl\": \"" + row.cells[6].textContent + "\",\n";
-    let approach = "\"scaApproaches\": \"" + approachParser(row.cells[7]) + "\"}";
+    let object = {};
+    object.id = row.cells[0].textContent;
+    object.bankName = row.cells[1].textContent;
+    object.bic = row.cells[2].textContent;
+    object.url = row.cells[3].textContent;
+    object.adapterId = row.cells[4].textContent;
+    object.bankCode = row.cells[5].textContent;
+    object.idpUrl = row.cells[6].textContent;
+    object.scaApproaches = approachParser(row.cells[7]);
 
-    return id + bankName + bic + url + adapterId + bankCode + idpUrl + approach;
+    return JSON.stringify(object);
 
     function approachParser(data) {
         let inputs = data.querySelectorAll("input");
@@ -22,6 +23,6 @@ function assembleRowData(e) {
             }
         })
 
-        return JSON.stringify(resultString);
+        return resultString;
     }
 }

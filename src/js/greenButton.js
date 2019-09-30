@@ -4,8 +4,6 @@ function greenButton(e) {
     if (tableRow.className) {
         if (window.confirm("Are you sure an aspsp has been built right?")) {
             saveButton(e);
-        } else {
-            return;
         }
     } else {
         if (window.confirm("Are you sure you want to update the aspsp?")) {

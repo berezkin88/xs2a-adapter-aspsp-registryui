@@ -13,8 +13,8 @@ function upload() {
                 uploadFailed();
                 throw Error(response.statusText);
             }
-            response;
             success();
+            return response;
         })
         .catch(error => console.log(error))
 }

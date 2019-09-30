@@ -1,5 +1,5 @@
 function success() {
-    let success = document.querySelector(".success")
+    let success = document.querySelector(".success");
 
     setTimeout(() => { success.style.opacity = 1 }, 500);
 

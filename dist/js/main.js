@@ -4,7 +4,7 @@ setTimeout(function () {
     document.querySelector("#import>button").addEventListener("click", () => FILE_UPLOAD_FIELD.click());
     FILE_UPLOAD_FIELD.addEventListener("change", upload);
     document.querySelectorAll(".mdl-textfield__input").forEach(field => field.addEventListener('keypress', event => onEnterPress(event)));
-}, 0)
+}, 0);
 
 function initGlobals() {
     window.FILE_UPLOAD_FIELD = document.querySelector("#import-field");
@@ -94,57 +94,30 @@ function search() {
 }
 
 function addRow() {
-    let editId = "edit-";
-    let updateId = "update-";
-    let deleteId = "delete-";
-
     let clone = HIDDEN_ROW.cloneNode(true);
     clone.cells[0].textContent = uuid();
     clone.removeAttribute("class");
     clone.setAttribute("class", "new");
     clone.lastElementChild.childNodes.forEach(e => {
         if (e.className) {
-            if (e.className.indexOf("edit") > -1) {
-                let helper = e.parentNode.childNodes[7];
-    
-                e.addEventListener("click", () => { editButton(e) })
-                e.setAttribute("id", editId + COUNTER);
-    
-                helper.setAttribute("data-mdl-for", editId + COUNTER);
-                editButton(e);
-            }
-    
-            if (e.className.indexOf("update") > -1) {
-                let helper = e.parentNode.childNodes[9];
-    
-                e.addEventListener("click", () => { greenButton(e) })
-                e.setAttribute("id", updateId + COUNTER);
-    
-                helper.setAttribute("data-mdl-for", updateId + COUNTER);
-            }
-    
-            if (e.className.indexOf("delete") > -1) {
-                let helper = e.parentNode.childNodes[11];
-    
-                e.addEventListener("click", () => { redButton(e) })
-                e.setAttribute("id", deleteId + COUNTER);
-    
-                helper.setAttribute("data-mdl-for", deleteId + COUNTER);
-            }
+            addTooltips(e);
+            editButton(e);
         }
     });
-    document.querySelector("table>tbody").appendChild(clone)
+    document.querySelector("table>tbody").appendChild(clone);
 
     COUNTER++;
 
     if (HIDDEN_ROW.parentElement.parentElement.parentElement.hidden) {
         showTable();
     }
+    // updating MDL library for making it work
+    componentHandler.upgradeAllRegistered();
 }
 
 function uuid() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      let r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
     });
   }
@@ -155,8 +128,6 @@ function greenButton(e) {
     if (tableRow.className) {
         if (window.confirm("Are you sure an aspsp has been built right?")) {
             saveButton(e);
-        } else {
-            return;
         }
     } else {
         if (window.confirm("Are you sure you want to update the aspsp?")) {
@@ -232,7 +203,7 @@ function updateButton(e) {
         }
     }).catch(function (error) {
         console.log(error);
-    });;
+    });
 }
 
 function saveButton(e) {
@@ -266,10 +237,6 @@ function purgeRow(e) {
 }
 
 function buildRow(data) {
-    let editId = "edit-";
-    let updateId = "update-";
-    let deleteId = "delete-";
-
     let clone = HIDDEN_ROW.cloneNode(true);
     clone.removeAttribute("class");
 
@@ -280,43 +247,21 @@ function buildRow(data) {
     clone.cells[4].textContent = data.adapterId;
     clone.cells[5].textContent = data.bankCode;
     clone.cells[6].textContent = data.idpUrl;
-    approacheParser(data.approach, clone.cells[7]);
+    approachParser(data.scaApproaches, clone.cells[7]);
 
     clone.lastElementChild.childNodes.forEach(e => {
         if (e.className) {
-            if (e.className.indexOf("edit") > -1) {
-                let helper = e.parentNode.childNodes[7];
-
-                e.addEventListener("click", () => { editButton(e) })
-                e.setAttribute("id", editId + COUNTER);
-
-                helper.setAttribute("data-mdl-for", editId + COUNTER);
-            }
-
-            if (e.className.indexOf("update") > -1) {
-                let helper = e.parentNode.childNodes[9];
-
-                e.addEventListener("click", () => { greenButton(e) })
-                e.setAttribute("id", updateId + COUNTER);
-
-                helper.setAttribute("data-mdl-for", updateId + COUNTER);
-            }
-
-            if (e.className.indexOf("delete") > -1) {
-                let helper = e.parentNode.childNodes[11];
-
-                e.addEventListener("click", () => { redButton(e) })
-                e.setAttribute("id", deleteId + COUNTER);
-
-                helper.setAttribute("data-mdl-for", deleteId + COUNTER);
-            }
+            addTooltips(e)
         }
     });
-    document.querySelector("table>tbody").appendChild(clone)
+    document.querySelector("table>tbody").appendChild(clone);
 
     COUNTER++;
 
-    function approacheParser(data, cell) {
+    // updating MDL library for making it work
+    componentHandler.upgradeAllRegistered();
+
+    function approachParser(data, cell) {
         if(!data) {
             return;
         }
@@ -361,28 +306,29 @@ function clearTable() {
 function assembleRowData(e) {
     let row = e.parentNode.parentNode;
 
-    let id = "{\"id\": \"" + row.cells[0].textContent + "\",\n";
-    let bankName = "\"name\": \"" + row.cells[1].textContent + "\",\n";
-    let bic = "\"bic\": \"" + row.cells[2].textContent + "\",\n";
-    let url = "\"url\": \"" + row.cells[3].textContent + "\",\n";
-    let adapterId = "\"adapterId\": \"" + row.cells[4].textContent + "\",\n";
-    let bankCode = "\"bankCode\": \"" + row.cells[5].textContent + "\",\n";
-    let idpUrl = "\"idpUrl\": \"" + row.cells[6].textContent + "\",\n";
-    let approache = "\"aspspScaApproaches\": \"" + approacheParser(row.cells[7]) + "\"}";
+    let object = {};
+    object.id = row.cells[0].textContent;
+    object.bankName = row.cells[1].textContent;
+    object.bic = row.cells[2].textContent;
+    object.url = row.cells[3].textContent;
+    object.adapterId = row.cells[4].textContent;
+    object.bankCode = row.cells[5].textContent;
+    object.idpUrl = row.cells[6].textContent;
+    object.scaApproaches = approachParser(row.cells[7]);
 
-    return id + bankName + bic + url + adapterId + bankCode + idpUrl + approache;
+    return JSON.stringify(object);
 
-    function approacheParser(data) {
+    function approachParser(data) {
         let inputs = data.querySelectorAll("input");
-        let resultString = "";
+        let resultString = [];
 
         inputs.forEach((element) => {
-            if(element.checked){
-                resultString += element.name + ";";
+            if (element.checked) {
+                resultString.push(element.name);
             }
         })
 
-        return resultString.slice(0, -1);
+        return JSON.stringify(resultString);
     }
 }
 
@@ -401,8 +347,8 @@ function upload() {
                 uploadFailed();
                 throw Error(response.statusText);
             }
-            response;
             success();
+            return response;
         })
         .catch(error => console.log(error))
 }
@@ -420,7 +366,7 @@ function clearContent() {
 }
 
 function uploadFailed() {
-    let failure = document.querySelector(".upload")
+    let failure = document.querySelector(".upload");
 
     setTimeout(() => { failure.style.opacity = 1 }, 500);
 
@@ -428,7 +374,7 @@ function uploadFailed() {
 }
 
 function searchFailed() {
-    let failure = document.querySelector(".failure.search")
+    let failure = document.querySelector(".failure.search");
 
     setTimeout(() => { failure.style.opacity = 1 }, 500);
 
@@ -436,11 +382,46 @@ function searchFailed() {
 }
 
 function success() {
-    let success = document.querySelector(".success")
+    let success = document.querySelector(".success");
 
     setTimeout(() => { success.style.opacity = 1 }, 500);
 
     setTimeout(() => { success.style.opacity = 0 }, 8000);
 }
 
+function addTooltips(e) {
+    let editId = "edit-";
+    let updateId = "update-";
+    let deleteId = "delete-";
+
+    if (e.className.indexOf("edit") > -1) {
+        let helper = e.parentNode.childNodes[7];
+
+        e.addEventListener("click", () => { editButton(e) });
+        e.setAttribute("id", editId + COUNTER);
+
+        helper.setAttribute("data-mdl-for", editId + COUNTER);
+        helper.setAttribute("class", "mdl-tooltip mdl-tooltip--top");
+    }
+    
+    if (e.className.indexOf("update") > -1) {
+        let helper = e.parentNode.childNodes[9];
+        
+        e.addEventListener("click", () => { greenButton(e) });
+        e.setAttribute("id", updateId + COUNTER);
+        
+        helper.setAttribute("data-mdl-for", updateId + COUNTER);
+        helper.setAttribute("class", "mdl-tooltip mdl-tooltip--top");
+    }
+    
+    if (e.className.indexOf("delete") > -1) {
+        let helper = e.parentNode.childNodes[11];
+        
+        e.addEventListener("click", () => { redButton(e) });
+        e.setAttribute("id", deleteId + COUNTER);
+        
+        helper.setAttribute("data-mdl-for", deleteId + COUNTER);
+        helper.setAttribute("class", "mdl-tooltip mdl-tooltip--top");
+    }
+}
 //# sourceMappingURL=main.js.map

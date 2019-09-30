@@ -1,8 +1,4 @@
 function buildRow(data) {
-    let editId = "edit-";
-    let updateId = "update-";
-    let deleteId = "delete-";
-
     let clone = HIDDEN_ROW.cloneNode(true);
     clone.removeAttribute("class");
 
@@ -17,37 +13,15 @@ function buildRow(data) {
 
     clone.lastElementChild.childNodes.forEach(e => {
         if (e.className) {
-            if (e.className.indexOf("edit") > -1) {
-                let helper = e.parentNode.childNodes[7];
-
-                e.addEventListener("click", () => { editButton(e) })
-                e.setAttribute("id", editId + COUNTER);
-
-                helper.setAttribute("data-mdl-for", editId + COUNTER);
-            }
-
-            if (e.className.indexOf("update") > -1) {
-                let helper = e.parentNode.childNodes[9];
-
-                e.addEventListener("click", () => { greenButton(e) })
-                e.setAttribute("id", updateId + COUNTER);
-
-                helper.setAttribute("data-mdl-for", updateId + COUNTER);
-            }
-
-            if (e.className.indexOf("delete") > -1) {
-                let helper = e.parentNode.childNodes[11];
-
-                e.addEventListener("click", () => { redButton(e) })
-                e.setAttribute("id", deleteId + COUNTER);
-
-                helper.setAttribute("data-mdl-for", deleteId + COUNTER);
-            }
+            addTooltips(e)
         }
     });
-    document.querySelector("table>tbody").appendChild(clone)
+    document.querySelector("table>tbody").appendChild(clone);
 
     COUNTER++;
+
+    // updating MDL library for making it work
+    componentHandler.upgradeAllRegistered();
 
     function approachParser(data, cell) {
         if(!data) {

@@ -22,3 +22,4 @@
 //=require clear.js
 //=require failureMessage.js
 //=require successMessage.js
+//=require addTooltips.js

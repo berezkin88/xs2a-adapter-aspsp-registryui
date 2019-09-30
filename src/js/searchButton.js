@@ -15,7 +15,7 @@ function search() {
 
     //  no need for now
     // if (data[3].value !== "")
-    //     url += "approache=" + data[3].value.toLowerCase();
+    //     url += "approach=" + data[3].value.toLowerCase();
 
     fetch(url)
         .then((response) => {

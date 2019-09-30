@@ -1,5 +1,5 @@
 function uploadFailed() {
-    let failure = document.querySelector(".upload")
+    let failure = document.querySelector(".upload");
 
     setTimeout(() => { failure.style.opacity = 1 }, 500);
 
@@ -7,7 +7,7 @@ function uploadFailed() {
 }
 
 function searchFailed() {
-    let failure = document.querySelector(".failure.search")
+    let failure = document.querySelector(".failure.search");
 
     setTimeout(() => { failure.style.opacity = 1 }, 500);
 
