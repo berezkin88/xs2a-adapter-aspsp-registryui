@@ -21,7 +21,7 @@ function assembleRowData(e) {
             if (element.checked) {
                 resultString.push(element.name);
             }
-        })
+        });
 
         return resultString;
     }

@@ -46,9 +46,9 @@
       "img": "src/img/*.*"
     },
     "dist": {
-      "css": "dist/css",
+      "css": "dist",
       "html": "dist",
-      "js": "dist/js",
+      "js": "dist",
       "fonts": "dist/fonts",
       "img": "dist/img"
     },

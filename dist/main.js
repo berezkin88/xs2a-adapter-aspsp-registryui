@@ -1,6 +1,5 @@
 setTimeout(function () {
     initGlobals();
-    document.querySelector("#add>button").addEventListener("click", addRow);
     document.querySelector("#import>button").addEventListener("click", () => FILE_UPLOAD_FIELD.click());
     FILE_UPLOAD_FIELD.addEventListener("change", upload);
     document.querySelectorAll(".mdl-textfield__input").forEach(field => field.addEventListener('keypress', event => onEnterPress(event)));
@@ -74,7 +73,7 @@ function search() {
 
     //  no need for now
     // if (data[3].value !== "")
-    //     url += "approache=" + data[3].value.toLowerCase();
+    //     url += "approach=" + data[3].value.toLowerCase();
 
     fetch(url)
         .then((response) => {
@@ -86,7 +85,10 @@ function search() {
         })
         .then(response => response.text())
         .then(response => JSON.parse(response).forEach((node) => buildRow(node)))
-        .catch(error => console.log(error));
+        .catch(error => {
+            console.log(error);
+            operationFailed();
+        });
 
     if (HIDDEN_ROW.parentElement.parentElement.parentElement.hidden) {
         showTable();
@@ -182,6 +184,7 @@ function deleteButton(e) {
         return response;
     }).catch(function (error) {
         console.log(error);
+        operationFailed();
     });
 }
 
@@ -203,6 +206,7 @@ function updateButton(e) {
         }
     }).catch(function (error) {
         console.log(error);
+        operationFailed();
     });
 }
 
@@ -227,6 +231,7 @@ function saveButton(e) {
         }
     }).catch(function (error) {
         console.log(error);
+        operationFailed();
     });
 }
 
@@ -308,7 +313,7 @@ function assembleRowData(e) {
 
     let object = {};
     object.id = row.cells[0].textContent;
-    object.bankName = row.cells[1].textContent;
+    object.name = row.cells[1].textContent;
     object.bic = row.cells[2].textContent;
     object.url = row.cells[3].textContent;
     object.adapterId = row.cells[4].textContent;
@@ -326,9 +331,9 @@ function assembleRowData(e) {
             if (element.checked) {
                 resultString.push(element.name);
             }
-        })
+        });
 
-        return JSON.stringify(resultString);
+        return resultString;
     }
 }
 
@@ -348,9 +353,11 @@ function upload() {
                 throw Error(response.statusText);
             }
             success();
-            return response;
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            console.log(error);
+            operationFailed();
+        })
 }
 
 function onEnterPress(event) {
@@ -366,7 +373,7 @@ function clearContent() {
 }
 
 function uploadFailed() {
-    let failure = document.querySelector(".upload");
+    let failure = document.querySelector(".failure.upload");
 
     setTimeout(() => { failure.style.opacity = 1 }, 500);
 
@@ -375,6 +382,14 @@ function uploadFailed() {
 
 function searchFailed() {
     let failure = document.querySelector(".failure.search");
+
+    setTimeout(() => { failure.style.opacity = 1 }, 500);
+
+    setTimeout(() => { failure.style.opacity = 0 }, 8000);
+}
+
+function operationFailed() {
+    let failure = document.querySelector(".failure.operation");
 
     setTimeout(() => { failure.style.opacity = 1 }, 500);
 
@@ -424,4 +439,20 @@ function addTooltips(e) {
         helper.setAttribute("class", "mdl-tooltip mdl-tooltip--top");
     }
 }
+function persist() {
+    fetch("v1/aspsps/persist", {
+        method: "POST"
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+            success();
+        })
+        .catch(error => {
+            console.log(error);
+            operationFailed(); 
+        })
+}
+
 //# sourceMappingURL=main.js.map

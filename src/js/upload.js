@@ -14,7 +14,9 @@ function upload() {
                 throw Error(response.statusText);
             }
             success();
-            return response;
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            console.log(error);
+            operationFailed();
+        })
 }

@@ -23,3 +23,4 @@
 //=require failureMessage.js
 //=require successMessage.js
 //=require addTooltips.js
+//=require persist.js

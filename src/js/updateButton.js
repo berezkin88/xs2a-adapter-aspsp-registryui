@@ -16,5 +16,6 @@ function updateButton(e) {
         }
     }).catch(function (error) {
         console.log(error);
+        operationFailed();
     });
 }

@@ -3,9 +3,16 @@
     <div class="mdl-layout__drawer">
         <nav class="mdl-navigatiion">
             <div class="add-button" id="add">
-                <button class="mdl-button mdl-js-button mdl-button--fab">
+                <button class="mdl-button mdl-js-button mdl-button--fab" onclick="addRow();">
                     <i class="material-icons">
                         add
+                    </i>
+                </button>
+            </div>
+            <div class="import-button" id="save">
+                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab" onclick="persist();">
+                    <i class="material-icons">
+                        save
                     </i>
                 </button>
             </div>
@@ -31,6 +38,9 @@
     <div class="tooltips">
         <div class="mdl-tooltip" data-mdl-for="add">
             Add new Aspsp
+        </div>
+        <div class="mdl-tooltip" data-mdl-for="save">
+            Save
         </div>
         <div class="mdl-tooltip" data-mdl-for="export">
             Export all Aspsps

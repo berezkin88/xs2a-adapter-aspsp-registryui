@@ -27,7 +27,10 @@ function search() {
         })
         .then(response => response.text())
         .then(response => JSON.parse(response).forEach((node) => buildRow(node)))
-        .catch(error => console.log(error));
+        .catch(error => {
+            console.log(error);
+            operationFailed();
+        });
 
     if (HIDDEN_ROW.parentElement.parentElement.parentElement.hidden) {
         showTable();

@@ -15,5 +15,6 @@ function deleteButton(e) {
         return response;
     }).catch(function (error) {
         console.log(error);
+        operationFailed();
     });
 }

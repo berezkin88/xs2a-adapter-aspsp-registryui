@@ -19,5 +19,6 @@ function saveButton(e) {
         }
     }).catch(function (error) {
         console.log(error);
+        operationFailed();
     });
 }
