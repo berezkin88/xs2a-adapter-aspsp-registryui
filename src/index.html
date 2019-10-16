@@ -6,7 +6,7 @@
         <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
             <thead>
                 <tr>
-                    <th class="mdl-data-table__cell--non-numeric text-align__right">Id</th>
+                    <th class="mdl-data-table__cell--non-numeric text-align__right column__short">Id</th>
                     <th class="mdl-data-table__cell--non-numeric">Bank Name</th>
                     <th class="mdl-data-table__cell--non-numeric">BIC</th>
                     <th class="mdl-data-table__cell--non-numeric">URL</th>
@@ -19,13 +19,13 @@
             </thead>
             <tbody>
                 <tr class="hidden">
-                    <td class="mdl-data-table__cell--non-numeric text-align__right"></td>
-                    <td class="mdl-data-table__cell--non-numeric"></td>
-                    <td class="mdl-data-table__cell--non-numeric"></td>
-                    <td class="mdl-data-table__cell--non-numeric"></td>
-                    <td class="mdl-data-table__cell--non-numeric"></td>
-                    <td class="mdl-data-table__cell--non-numeric"></td>
-                    <td></td>
+                    <td class="mdl-data-table__cell--non-numeric text-align__right column__short"></td>
+                    <td class="mdl-data-table__cell--non-numeric" onfocusout="validateBankName(this);"></td>
+                    <td class="mdl-data-table__cell--non-numeric" onfocusout="validateBic(this);"></td>
+                    <td class="mdl-data-table__cell--non-numeric" onfocusout="validateUrl(this);"></td>
+                    <td class="mdl-data-table__cell--non-numeric" onfocusout="validateAdapterId(this);"></td>
+                    <td onfocusout="validateBankCode(this);"></td>
+                    <td class="mdl-data-table__cell--non-numeric" onfocusout="validateUrl(this);"></td>
                     <td class="mdl-data-table__cell--non-numeric text-align__right">
                         <div class="approaches">
                             <div id="embedded">

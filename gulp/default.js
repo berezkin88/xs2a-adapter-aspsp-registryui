@@ -7,10 +7,7 @@ gulp.task('default', function() {
         [
             'sass:watch', 
             'js:watch', 
-            'html:watch', 
-            'fonts:watch',
-            'img:watch',
-            'libs:watch'
+            'html:watch'
         ],
         'server'
     );
