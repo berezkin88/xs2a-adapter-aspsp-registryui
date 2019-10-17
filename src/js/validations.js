@@ -64,7 +64,7 @@ function validateBankCode(element) {
     if (!((target.length === length && regex.test(target)) || target === "")) {
         element.style.background = "rgba(255, 152, 0, 0.2)";
         element.classList.add("invalid");
-        warning("Bank Code should consist of numbers only");
+        warning("Bank Code should be 8 digits long and consist of numbers only");
     } else {
         element.style.background = "none";
         element.classList.remove("invalid");

@@ -2,34 +2,43 @@
 <div class="mdl-layout--fixed-drawer mdl-layout mdl-js-layout">
     <div class="mdl-layout__drawer">
         <nav class="mdl-navigatiion">
-            <div class="add-button" id="add">
-                <button class="mdl-button mdl-js-button mdl-button--fab" onclick="addRow();">
+            <div class="import-button" id="import">
+                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab"
+                    onclick="alert('import is not implemented yet');">
                     <i class="material-icons">
-                        add
-                    </i>
-                </button>
-            </div>
-            <div class="import-button" id="save">
-                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab" onclick="persist();">
-                    <i class="material-icons">
-                        save
+                        arrow_downward
                     </i>
                 </button>
             </div>
             <div class="export-button" id="export">
+                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab"
+                    onclick="alert('export is not implemented yet');">
+                    <i class="material-icons">
+                        arrow_upward
+                    </i>
+                </button>
+            </div>
+            <div class="download-button" id="download">
                 <a href="/v1/aspsps/export" download="aspsps.csv">
                     <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab mdl-button--colored">
                         <i class="material-icons">
-                            arrow_downward
+                            cloud_download
                         </i>
                     </button>
                 </a>
             </div>
-            <div class="import-button" id="import">
+            <div class="upload-button" id="upload">
                 <input type="file" name="import file" id="import-field" hidden>
                 <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab mdl-button--primary">
                     <i class="material-icons">
-                        arrow_upward
+                        cloud_upload
+                    </i>
+                </button>
+            </div>
+            <div class="add-button" id="add">
+                <button class="mdl-button mdl-js-button mdl-button--fab" onclick="addRow();">
+                    <i class="material-icons">
+                        add
                     </i>
                 </button>
             </div>
@@ -39,14 +48,17 @@
         <div class="mdl-tooltip" data-mdl-for="add">
             Add new Aspsp
         </div>
-        <div class="mdl-tooltip" data-mdl-for="save">
-            Save
+        <div class="mdl-tooltip" data-mdl-for="import">
+            Import from Lucene
         </div>
         <div class="mdl-tooltip" data-mdl-for="export">
-            Export all Aspsps
+            Export into Lucene
         </div>
-        <div class="mdl-tooltip" data-mdl-for="import">
-            Import Aspsps
+        <div class="mdl-tooltip" data-mdl-for="download">
+            Download all Aspsps
+        </div>
+        <div class="mdl-tooltip" data-mdl-for="upload">
+            Upload Aspsps
         </div>
     </div>
 </div>

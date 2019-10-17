@@ -1,6 +1,5 @@
 function addRow() {
     let clone = HIDDEN_ROW.cloneNode(true);
-    clone.cells[0].textContent = "some id";
     clone.removeAttribute("class");
     clone.setAttribute("class", "new");
     clone.lastElementChild.childNodes.forEach(e => {
