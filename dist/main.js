@@ -294,6 +294,7 @@ function returnTestData() {
 
     return JSON.parse(sample);
 }
+
 function fail(message) {
     let messageBlock = FAILURE.querySelector(".message");
     messageBlock.textContent = message;
@@ -320,6 +321,7 @@ function warning(message) {
 
     setTimeout(() => { WARNING.style.opacity = 0 }, 8000);
 }
+
 function addRow() {
     let clone = HIDDEN_ROW.cloneNode(true);
     clone.cells[0].textContent = "some id";
@@ -557,7 +559,6 @@ function redButton(e) {
         }
     }
 }
-
 
 function paginate(data) {
     let dataLength = data.length;
