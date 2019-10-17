@@ -13,10 +13,10 @@ gulp.task('js', function () {
       extensions: "js",
       hardFail: true
     }))
-    // .pipe(babel({
-    //   presets: ['@babel/env']
-    // }))
-    // .pipe(uglify())
+    .pipe(babel({
+      presets: ['@babel/env']
+    }))
+    .pipe(uglify())
     .pipe(gulp.dest(cnf.dist.js))
 });
 
