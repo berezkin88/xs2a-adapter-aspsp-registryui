@@ -11,7 +11,7 @@ var rename =        require("gulp-rename");
 gulp.task('sass', function () {
   return gulp.src(cnf.src.sass)
   .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-  .pipe(sourcemaps.init())
+  // .pipe(sourcemaps.init())
   .pipe(sass().on('error', sass.logError))
   .pipe(autoprefixer())
   .pipe(cssnano())
@@ -22,7 +22,7 @@ gulp.task('sass', function () {
     suffix: ".min",
     extname: ".css"
   }))
-  .pipe(sourcemaps.write()) 
+  // .pipe(sourcemaps.write()) 
   .pipe(gulp.dest(cnf.dist.css));
 });
  

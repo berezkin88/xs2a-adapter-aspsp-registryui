@@ -153,6 +153,8 @@ function search() {
     if (data[2].value !== "")
         url += "bankCode=" + data[2].value + "&";
 
+    url += "size=9999";
+
     fetch(url)
         .then((response) => {
             if (!response.ok) {
@@ -161,9 +163,10 @@ function search() {
             return response;
         })
         .then(response => response.text())
-        .then(response => JSON.parse(response).forEach((node) => buildRow(node)))
+        .then(response => paginate(JSON.parse(response)))
         .catch(() => {
             fail("Failed to find any records. Please double check input parameters.");
+            paginate(DEFAULT_DATA);
         });
 
     if (HIDDEN_ROW.parentElement.parentElement.parentElement.hidden) {

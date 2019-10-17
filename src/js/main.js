@@ -5,3 +5,4 @@
 //=require utils.js
 //=require messages.js
 //=require buttons.js
+//=require peginator.js

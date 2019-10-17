@@ -26,6 +26,7 @@
                     <td class="mdl-data-table__cell--non-numeric" onfocusout="validateAdapterId(this);"></td>
                     <td onfocusout="validateBankCode(this);"></td>
                     <td class="mdl-data-table__cell--non-numeric" onfocusout="validateUrl(this);"></td>
+
                     <td class="mdl-data-table__cell--non-numeric text-align__right">
                         <div class="approaches">
                             <div id="embedded">
@@ -74,5 +75,11 @@
         <h1>To start working with ASPSP Registry try searching for something or adding a new record</h1>
     </div>
 </main>
+<div class="show-more" hidden>
+    <button class="more mdl-button mdl-js-button mdl-js-ripple-effect">Show 10 more</button>
+    <div>
+        Total: <span class="total"></span>
+    </div>
+</div>
 
 @@include('template/footer.html')
