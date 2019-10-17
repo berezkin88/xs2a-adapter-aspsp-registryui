@@ -105,16 +105,14 @@ function deleteButton(e) {
 function persist() {
     fetch("v1/aspsps/persist", {
         method: "POST"
+    }).then(response => {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        success();
+    }).catch(() => {
+        fail("Could not update Lucene indexes");
     })
-        .then(response => {
-            if (!response.ok) {
-                throw Error(response.statusText);
-            }
-            success();
-        })
-        .catch(() => {
-            fail("Could not update Lucene indexes");
-        })
 }
 
 function upload() {
@@ -126,16 +124,14 @@ function upload() {
     fetch("/v1/aspsps/import", {
         method: 'POST',
         body: data
+    }).then(response => {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        success();
+    }).catch(() => {
+        fail("Failed to upload the file. It looks like the file has an inappropriate format.");
     })
-        .then(response => {
-            if (!response.ok) {
-                throw Error(response.statusText);
-            }
-            success();
-        })
-        .catch(() => {
-            fail("Failed to upload the file. It looks like the file has an inappropriate format.");
-        })
 }
 
 function search() {
@@ -155,19 +151,17 @@ function search() {
 
     url += "size=9999";
 
-    fetch(url)
-        .then((response) => {
-            if (!response.ok) {
-                throw Error(response.statusText);
-            }
-            return response;
-        })
-        .then(response => response.text())
-        .then(response => paginate(JSON.parse(response)))
-        .catch(() => {
-            fail("Failed to find any records. Please double check input parameters.");
-            paginate(DEFAULT_DATA);
-        });
+    fetch(url).then((response) => {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response;
+    }).then(response => response.text()
+    ).then(response => paginate(JSON.parse(response))
+    ).catch(() => {
+        fail("Failed to find any records. Please double check input parameters.");
+        paginate(DEFAULT_DATA);
+    });
 
     if (HIDDEN_ROW.parentElement.parentElement.parentElement.hidden) {
         showTable();
