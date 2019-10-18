@@ -165,6 +165,28 @@ function search() {
         showTable();
     }
 }
+
+function importButton() {
+    fetch("/v1/aspsps/adapter/import").then(response => {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        success();
+    }).catch(() => {
+        fail("Failed to import data from Adapter");
+    })
+}
+
+function exportButton() {
+    fetch("/v1/aspsps/adapter/export").then(response => {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        success();
+    }).catch(() => {
+        fail("Failed to export data into Adapter");
+    })
+}
 // End of requests part
 
 function editButton(e) {
@@ -226,4 +248,12 @@ function redButton(e) {
             toggleButtons(e);
         }
     }
+}
+
+function showButton() {
+    let drawer = document.querySelector(".mdl-layout__drawer");
+    let icon = document.querySelector(".expand>button>i");
+
+    drawer.classList.toggle("is-hidden");
+    icon.classList.toggle("rotate");
 }

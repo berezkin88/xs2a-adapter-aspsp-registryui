@@ -40,9 +40,8 @@
       "js": "src/js/main.js"
     },
     "dist": {
-      "css": "dist",
-      "html": "dist",
-      "js": "dist"
+      "dep": "dist",
+      "main": "../../javaprojects/aspsp-registry-manager/registry-manager-rest-server/src/main/resources/static"
     }
   },
   "browserslist": [

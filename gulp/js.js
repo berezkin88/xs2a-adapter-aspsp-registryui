@@ -5,8 +5,17 @@ var cnf = require('../package.json').config;
 var babel = require('gulp-babel');
 var include = require("gulp-include");
 var uglify = require('gulp-uglify');
+var rename = require("gulp-rename");
 
 gulp.task('js', function () {
+  return jsFlow(cnf.dist.dep), jsFlow(cnf.dist.main);
+});
+
+gulp.task('js:watch', function () {
+  gulp.watch(cnf.src.js, ['js']);
+});
+
+function jsFlow(destination) {
   return gulp.src(cnf.src.js)
     .pipe(plumber({ errorHandler: notify.onError("Error: <%= error %>") }))
     .pipe(include({
@@ -17,9 +26,12 @@ gulp.task('js', function () {
       presets: ['@babel/env']
     }))
     .pipe(uglify())
-    .pipe(gulp.dest(cnf.dist.js))
-});
-
-gulp.task('js:watch', function () {
-  gulp.watch(cnf.src.js, ['js']);
-});
+    .pipe(rename({
+      dirname: "",
+      basename: "main",
+      prefix: "",
+      suffix: ".min",
+      extname: ".js"
+    }))
+    .pipe(gulp.dest(destination));
+}
