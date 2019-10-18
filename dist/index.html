@@ -25,6 +25,15 @@
                     </i>
                 </button>
             </div>
+            <div class="merge-button" id="merge">
+                <input type="file" name="merge file" id="merge-field" hidden>
+                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab"
+                    onclick="alert('merging is not implemented yet');">
+                    <i class="material-icons">
+                        merge_type
+                    </i>
+                </button>
+            </div>
             <div class="export-button" id="export" onclick="exportButton();">
                 <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab"
                     onclick="alert('export is not implemented yet');">
@@ -67,20 +76,23 @@
         </nav>
     </div>
     <div class="tooltips">
-        <div class="mdl-tooltip" data-mdl-for="add">
-            Add new Aspsp
+        <div class="mdl-tooltip" data-mdl-for="merge">
+            Merge CSV file
         </div>
         <div class="mdl-tooltip" data-mdl-for="import">
-            Import from Lucene
+            Import from Adapter
         </div>
         <div class="mdl-tooltip" data-mdl-for="export">
-            Export into Lucene
+            Export into Adapter
         </div>
         <div class="mdl-tooltip" data-mdl-for="download">
-            Download all Aspsps
+            Download CSV file
         </div>
         <div class="mdl-tooltip" data-mdl-for="upload">
-            Upload Aspsps
+            Upload CSV file
+        </div>
+        <div class="mdl-tooltip" data-mdl-for="add">
+            Add new record
         </div>
     </div>
 </div>

@@ -187,6 +187,25 @@ function exportButton() {
         fail("Failed to export data into Adapter");
     })
 }
+
+function mergeButton() {
+    let file = FILE_MERGE_FIELD.files[0];
+    let data = new FormData();
+
+    data.append("file", file);
+
+    fetch("/v1/aspsps/merge", {
+        method: 'POST',
+        body: data
+    }).then(response => {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        success();
+    }).catch(() => {
+        fail("Failed to upload and merge the file.");
+    })
+}
 // End of requests part
 
 function editButton(e) {
