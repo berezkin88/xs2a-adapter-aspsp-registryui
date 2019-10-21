@@ -2,28 +2,11 @@
 <div class="mdl-layout--fixed-drawer mdl-layout mdl-js-layout">
     <div class="mdl-layout__drawer animated is-hidden">
         <nav class="mdl-navigatiion">
-            <div class="import-button" id="import" onclick="importButton();">
-                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab"
-                    onclick="alert('import is not implemented yet');">
+            <div class="upload-button" id="upload">
+                <input type="file" name="import file" id="import-field" hidden>
+                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab">
                     <i class="material-icons">
-                        arrow_downward
-                    </i>
-                </button>
-            </div>
-            <div class="merge-button" id="merge">
-                <input type="file" name="merge file" id="merge-field" hidden>
-                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab"
-                    onclick="alert('merging is not implemented yet');">
-                    <i class="material-icons">
-                        merge_type
-                    </i>
-                </button>
-            </div>
-            <div class="export-button" id="export" onclick="exportButton();">
-                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab"
-                    onclick="alert('export is not implemented yet');">
-                    <i class="material-icons">
-                        arrow_upward
+                        cloud_upload
                     </i>
                 </button>
             </div>
@@ -36,11 +19,11 @@
                     </button>
                 </a>
             </div>
-            <div class="upload-button" id="upload">
-                <input type="file" name="import file" id="import-field" hidden>
+            <div class="merge-button" id="merge">
+                <input type="file" name="merge file" id="merge-field" hidden>
                 <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab mdl-button--primary">
                     <i class="material-icons">
-                        cloud_upload
+                        merge_type
                     </i>
                 </button>
             </div>
@@ -62,7 +45,7 @@
     </div>
     <div class="tooltips">
         <div class="mdl-tooltip" data-mdl-for="merge">
-            Merge CSV file
+            Bulk upload <br>(Save and update)
         </div>
         <div class="mdl-tooltip" data-mdl-for="import">
             Import from Adapter
