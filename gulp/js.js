@@ -8,7 +8,7 @@ var uglify = require('gulp-uglify');
 var rename = require("gulp-rename");
 
 gulp.task('js', function () {
-  return jsFlow(cnf.dist.dep), jsFlow(cnf.dist.main);
+  return jsFlow(cnf.dist.dep), jsMainFlow(cnf.dist.main);
 });
 
 gulp.task('js:watch', function () {
@@ -32,6 +32,16 @@ function jsFlow(destination) {
       prefix: "",
       suffix: ".min",
       extname: ".js"
+    }))
+    .pipe(gulp.dest(destination));
+}
+
+function jsMainFlow(destination) {
+  return gulp.src(cnf.src.js)
+    .pipe(plumber({ errorHandler: notify.onError("Error: <%= error %>") }))
+    .pipe(include({
+      extensions: "js",
+      hardFail: true
     }))
     .pipe(gulp.dest(destination));
 }

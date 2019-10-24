@@ -1,6 +1,6 @@
 function validateBankName(element) {
     let target = element.textContent;
-    let regex = /^[a-zA-Z0-9-\s]*$/;
+    let regex = /^[a-zA-Z0-9äöüÄÖÜß-\s]*$/;
 
     if (!(regex.test(target) || target === "")) {
         element.style.background = "rgba(255, 152, 0, 0.2)";
@@ -44,7 +44,7 @@ function validateUrl(element) {
 
 function validateAdapterId(element) {
     let target = element.textContent;
-    let regex = /^[a-zA-Z0-9-]*$/;
+    let regex = /^[a-zA-Z0-9-äöüÄÖÜß]*$/;
 
     if (!(regex.test(target) || target === "")) {
         element.style.background = "rgba(255, 152, 0, 0.2)";

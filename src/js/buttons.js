@@ -120,7 +120,7 @@ function upload() {
 
     data.append("file", file);
 
-    fetch("/v1/aspsps/import", {
+    fetch("/v1/aspsps/csv/import", {
         method: 'POST',
         body: data
     }).then(response => {
@@ -194,7 +194,7 @@ function mergeButton() {
 
     data.append("file", file);
 
-    fetch("/v1/aspsps/merge", {
+    fetch("/v1/aspsps/csv/merge", {
         method: 'POST',
         body: data
     }).then(response => {
