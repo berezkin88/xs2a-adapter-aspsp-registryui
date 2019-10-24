@@ -20,7 +20,7 @@ function validateBic(element) {
     if (!(((target.length === 6 || target.length === 8 || target.length === 11) && regex.test(target)) || target === "")) {
         element.style.background = "rgba(255, 152, 0, 0.2)";
         element.classList.add("invalid");
-        warning("BIC should be 11 characters long and consist of aA-zZ, 0-9");
+        warning("BIC should be 6, 8, 11 characters long and consist of word characters and numbers only");
     } else {
         element.style.background = "none";
         element.classList.remove("invalid");
