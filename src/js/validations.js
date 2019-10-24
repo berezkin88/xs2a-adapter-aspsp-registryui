@@ -16,9 +16,8 @@ function validateBic(element) {
     toUpper(element);
     let target = element.textContent;
     let regex = /^[A-Z0-9]*$/;
-    let length = 11;
 
-    if (!((target.length === length && regex.test(target)) || target === "")) {
+    if (!(((target.length === 6 || target.length === 8 || target.length === 11) && regex.test(target)) || target === "")) {
         element.style.background = "rgba(255, 152, 0, 0.2)";
         element.classList.add("invalid");
         warning("BIC should be 11 characters long and consist of aA-zZ, 0-9");
