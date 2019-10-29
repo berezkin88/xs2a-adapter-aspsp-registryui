@@ -10,6 +10,7 @@
                 </button>
             </div>
             <div class="export-button" id="export" onclick="exportButton();">
+<<<<<<< HEAD
                 <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab">
                     <i class="material-icons">
                         arrow_upward
@@ -19,13 +20,17 @@
             <div class="upload-button" id="upload">
                 <input type="file" name="import file" id="import-field" hidden>
                 <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab">
+=======
+                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab"
+                    onclick="alert('export is not implemented yet');">
+>>>>>>> little change
                     <i class="material-icons">
-                        cloud_upload
+                        arrow_upward
                     </i>
                 </button>
             </div>
             <div class="download-button" id="download">
-                <a href="/v1/aspsps/csv/export" download="aspsps.csv">
+                <a href="/v1/aspsps/csv/download" download="aspsps.csv">
                     <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab mdl-button--colored">
                         <i class="material-icons">
                             cloud_download
@@ -33,11 +38,11 @@
                     </button>
                 </a>
             </div>
-            <div class="merge-button" id="merge">
-                <input type="file" name="merge file" id="merge-field" hidden>
+            <div class="upload-button" id="upload">
+                <input type="file" name="import file" id="import-field" hidden>
                 <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab mdl-button--primary">
                     <i class="material-icons">
-                        merge_type
+                        cloud_upload
                     </i>
                 </button>
             </div>
@@ -58,27 +63,24 @@
         </nav>
     </div>
     <div class="tooltips">
-        <div class="mdl-tooltip" data-mdl-for="merge">
-            Bulk upload <br>(Save and update)
+        <div class="mdl-tooltip" data-mdl-for="add">
+            Add new Aspsp
         </div>
         <div class="mdl-tooltip" data-mdl-for="import">
-            Import from Adapter
+            Import from Lucene
         </div>
         <div class="mdl-tooltip" data-mdl-for="export">
-            Export into Adapter
+            Export into Lucene
         </div>
         <div class="mdl-tooltip" data-mdl-for="download">
-            Download CSV file
+            Download all Aspsps
         </div>
         <div class="mdl-tooltip" data-mdl-for="upload">
-            Upload CSV file
-        </div>
-        <div class="mdl-tooltip" data-mdl-for="add">
-            Add new record
+            Upload Aspsps
         </div>
     </div>
 </div>
-<div class="flex-container">
+<div class="flex-containder">
     <header class="registry-header">
         <div class="header">
             <h1 class="registry-header">Aspsp Registry Manager</h1>
