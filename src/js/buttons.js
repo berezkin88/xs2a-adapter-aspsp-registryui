@@ -101,26 +101,13 @@ function deleteButton(e) {
     });
 }
 
-function persist() {
-    fetch("v1/aspsps/persist", {
-        method: "POST"
-    }).then(response => {
-        if (!response.ok) {
-            throw Error(response.statusText);
-        }
-        success();
-    }).catch(() => {
-        fail("Could not update Lucene indexes");
-    })
-}
-
 function upload() {
     let file = FILE_UPLOAD_FIELD.files[0];
     let data = new FormData();
 
     data.append("file", file);
 
-    fetch("/v1/aspsps/csv/import", {
+    fetch("/v1/aspsps/csv/upload", {
         method: 'POST',
         body: data
     }).then(response => {
