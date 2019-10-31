@@ -154,7 +154,7 @@ function search() {
 }
 
 function importButton() {
-    fetch("/v1/aspsps/adapter/import").then(response => {
+    fetch("/v1/aspsps/outbound/import").then(response => {
         if (!response.ok) {
             throw Error(response.statusText);
         }
@@ -165,7 +165,7 @@ function importButton() {
 }
 
 function exportButton() {
-    fetch("/v1/aspsps/adapter/export").then(response => {
+    fetch("/v1/aspsps/outbound/export").then(response => {
         if (!response.ok) {
             throw Error(response.statusText);
         }
