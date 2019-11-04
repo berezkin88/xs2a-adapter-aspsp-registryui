@@ -1,5 +1,4 @@
-function paginate(data) {
-    let dataLength = data.length;
+function paginate(data, dataLength) {
     let step = 10;
     let current = 0;
     let button = document.querySelector(".show-more");

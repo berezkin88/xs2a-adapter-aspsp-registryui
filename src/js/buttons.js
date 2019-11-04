@@ -123,6 +123,7 @@ function upload() {
 function search() {
     clearTable();
 
+    let dataLength;
     let data = document.querySelector(".search-form");
     let url = "/v1/aspsps/?";
 
@@ -141,9 +142,10 @@ function search() {
         if (!response.ok) {
             throw Error(response.statusText);
         }
+        dataLength = response.headers.get("X-Total-Elements");
         return response;
     }).then(response => response.text()
-    ).then(response => paginate(JSON.parse(response))
+    ).then(response => paginate(JSON.parse(response), dataLength)
     ).catch(() => {
         fail("Failed to find any records. Please double check input parameters.");
     });
