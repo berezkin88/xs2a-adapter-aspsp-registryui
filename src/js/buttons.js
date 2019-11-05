@@ -145,7 +145,7 @@ function search() {
         dataLength = response.headers.get("X-Total-Elements");
         return response;
     }).then(response => response.text()
-    ).then(response => paginate(JSON.parse(response), dataLength)
+    ).then(response => paginate(JSON.parse(response), dataLength, url)
     ).catch(() => {
         fail("Failed to find any records. Please double check input parameters.");
     });

@@ -62,8 +62,17 @@ function clearTable() {
     }
 }
 
+function checkMorePart() {
+    let showMore = document.querySelector(".show-more");
+
+    if (!showMore.hidden) {
+        showMore.hidden = true;
+    }
+}
+
 function clearContent() {
     clearTable();
+    checkMorePart();
 
     document.querySelectorAll(".mdl-textfield__input").forEach(element => { element.value = ""; element.parentElement.classList.remove("is-dirty") });
 }
