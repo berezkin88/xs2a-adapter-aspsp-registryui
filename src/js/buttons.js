@@ -120,11 +120,9 @@ function upload() {
     })
 }
 
-function searchButton() {
+async function searchButton() {
     clearTable();
 
-    let dataLength;
-    let response;
     BASE_URL = "/v1/aspsps/?";
 
     let data = document.querySelector(".search-form");
@@ -138,10 +136,11 @@ function searchButton() {
     if (data[2].value !== "")
         BASE_URL += "bankCode=" + data[2].value + "&";
 
-    response = search(BASE_URL);
-    dataLength = response.headers.get("X-Total-Elements");
+    BASE_URL += "size=99999";
 
-    paginate(JSON.parse(response.text()), dataLength);
+    let response = await search(BASE_URL);
+
+    PAGINATOR.create(response.data, response.headers);
 
     if (HIDDEN_ROW.parentElement.parentElement.parentElement.hidden) {
         showTable();
@@ -191,26 +190,20 @@ function mergeButton() {
     })
 }
 
-function showMore() {
-    PAGINATOR.addRow(PAGINATOR.data);
-}
+async function search(URI) {
+    let output = {};
 
-function search(URI) {
-    let output;
-
-    fetch(URI).then(response => {
-        if (!response.ok) {
-            throw Error(response.statusText)
-        }
-        output = response;
-        return output;
-    }).catch(() => {
-        fail("Failed to retrieve more search results... Please retry later");
-    });
+    let response = await fetch(BASE_URL);
+    output.headers = await response.headers.get("X-Total-Elements");
+    output.data = JSON.parse(await response.text());
 
     return output;
 }
 // End of requests part
+
+function showMore() {
+    PAGINATOR.addRow(PAGINATOR.data);
+}
 
 function editButton(e) {
     let editButton = e.parentNode.children[0];
