@@ -120,35 +120,28 @@ function upload() {
     })
 }
 
-function search() {
+function searchButton() {
     clearTable();
 
     let dataLength;
+    let response;
+    BASE_URL = "/v1/aspsps/?";
+
     let data = document.querySelector(".search-form");
-    let url = "/v1/aspsps/?";
 
     if (data[0].value !== "")
-        url += "name=" + data[0].value.toLowerCase() + "&";
+        BASE_URL += "name=" + data[0].value.toLowerCase() + "&";
 
     if (data[1].value !== "")
-        url += "bic=" + data[1].value + "&";
+        BASE_URL += "bic=" + data[1].value + "&";
 
     if (data[2].value !== "")
-        url += "bankCode=" + data[2].value + "&";
+        BASE_URL += "bankCode=" + data[2].value + "&";
 
-    url += "size=9999";
+    response = search(BASE_URL);
+    dataLength = response.headers.get("X-Total-Elements");
 
-    fetch(url).then((response) => {
-        if (!response.ok) {
-            throw Error(response.statusText);
-        }
-        dataLength = response.headers.get("X-Total-Elements");
-        return response;
-    }).then(response => response.text()
-    ).then(response => paginate(JSON.parse(response), dataLength, url)
-    ).catch(() => {
-        fail("Failed to find any records. Please double check input parameters.");
-    });
+    paginate(JSON.parse(response.text()), dataLength);
 
     if (HIDDEN_ROW.parentElement.parentElement.parentElement.hidden) {
         showTable();
@@ -196,6 +189,26 @@ function mergeButton() {
     }).catch(() => {
         fail("Failed to upload and merge the file.");
     })
+}
+
+function showMore() {
+    PAGINATOR.addRow(PAGINATOR.data);
+}
+
+function search(URI) {
+    let output;
+
+    fetch(URI).then(response => {
+        if (!response.ok) {
+            throw Error(response.statusText)
+        }
+        output = response;
+        return output;
+    }).catch(() => {
+        fail("Failed to retrieve more search results... Please retry later");
+    });
+
+    return output;
 }
 // End of requests part
 

@@ -6,4 +6,5 @@ function initGlobals() {
     window.FAILURE = document.querySelector(".alert.failure");
     window.SUCCESS = document.querySelector(".alert.success");
     window.COUNTER = 0;
+    window.BASE_URL;
 }
