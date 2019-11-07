@@ -16,6 +16,7 @@ let PAGINATOR = {
     PAGINATOR.create = (data, dataLength) => {
 
         PAGINATOR.left = 0;
+        PAGINATOR.page = 0;
         PAGINATOR.data = data;
         PAGINATOR.setStep(dataLength);
         // No need until advanced pagination provided
