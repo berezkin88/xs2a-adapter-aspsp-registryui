@@ -199,7 +199,7 @@ function mergeButton() {
 async function search(URI) {
     let output = {};
 
-    let response = await fetch(BASE_URL);
+    let response = await fetch(URI);
     output.headers = await response.headers.get("X-Total-Elements");
     output.data = JSON.parse(await response.text());
 
