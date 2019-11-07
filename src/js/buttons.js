@@ -123,6 +123,8 @@ function upload() {
 async function searchButton() {
     clearTable();
 
+    let response;
+
     BASE_URL = "/v1/aspsps/?";
 
     let data = document.querySelector(".search-form");
@@ -136,9 +138,11 @@ async function searchButton() {
     if (data[2].value !== "")
         BASE_URL += "bankCode=" + data[2].value + "&";
 
-    BASE_URL += "size=99999";
-
-    let response = await search(BASE_URL);
+    try {
+        response = await search(BASE_URL);
+    } catch (error) {
+        fail("Failed to find any records. Please double check the search conditions");
+    }
 
     PAGINATOR.create(response.data, response.headers);
 
@@ -203,8 +207,15 @@ async function search(URI) {
 }
 // End of requests part
 
-function showMore() {
-    PAGINATOR.addRow(PAGINATOR.data);
+async function showMore() {
+
+    let pagination = "&page=" + PAGINATOR.page + "&size=" + PAGINATOR.size;
+
+    let nextPageUrl = BASE_URL + pagination;
+
+    let output = await search(nextPageUrl);
+
+    PAGINATOR.addRow(output.data);
 }
 
 function editButton(e) {
