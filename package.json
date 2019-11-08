@@ -41,7 +41,9 @@
     },
     "dist": {
       "dep": "dist",
-      "main": "../../javaprojects/aspsp-registry-manager/registry-manager-rest-server/src/main/resources/static"
+      "styles": "../../javaprojects/aspsp-registry-manager/registry-manager-rest-server/src/main/resources/static",
+      "scripts": "../../javaprojects/aspsp-registry-manager/registry-manager-rest-server/src/main/resources/static",
+      "html": "../../javaprojects/aspsp-registry-manager/registry-manager-rest-server/src/main/resources/templates"
     }
   },
   "browserslist": [
