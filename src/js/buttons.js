@@ -140,41 +140,19 @@ async function searchButton() {
 
     try {
         response = await search(BASE_URL);
+
+        if (response.data.length === 0) {
+            throw Error("no data");
+        }
+
+        PAGINATOR.create(response.data, response.headers);
     } catch (error) {
         fail("Failed to find any records. Please double check the search conditions");
     }
 
-    PAGINATOR.create(response.data, response.headers);
-
     if (HIDDEN_ROW.parentElement.parentElement.parentElement.hidden) {
         showTable();
     }
-}
-
-function importButton() {
-    fetch("/v1/aspsps/adapter/import", {
-        method: 'POST'
-    }).then(response => {
-        if (!response.ok) {
-            throw Error(response.statusText);
-        }
-        success();
-    }).catch(() => {
-        fail("Failed to import data from Adapter");
-    })
-}
-
-function exportButton() {
-    fetch("/v1/aspsps/adapter/export", {
-        method: 'POST'
-    }).then(response => {
-        if (!response.ok) {
-            throw Error(response.statusText);
-        }
-        success();
-    }).catch(() => {
-        fail("Failed to export data into Adapter");
-    })
 }
 
 function mergeButton() {

@@ -32,7 +32,7 @@ let PAGINATOR = {
     };
 
     PAGINATOR.addRow = (input) => {
-        for (let iterator = 0, limit = Math.min(PAGINATOR.size, PAGINATOR.left); iterator < limit; iterator++) {
+        for (let iterator = 0, limit = Math.min(PAGINATOR.size, PAGINATOR.left, input.length); iterator < limit; iterator++) {
             buildRow(input[iterator]);
             PAGINATOR.left--;
         }
