@@ -81,7 +81,10 @@
         </div>
     </div>
     <div class="manager-layout--fixed-drawer margin-top__zero">
-        <div class="logout-drawer">
+        <div class="username">
+            <span class="user" sec:authentication="name"></span>
+        </div>
+        <div class="logout-drawer margin-top__zero">
             <div class="logout">
                 <a href="/logout" class="logout-link">
                     <button class="mdl-button mdl-js-button mdl-button--fab" id="logout-button">
@@ -91,11 +94,8 @@
                     </button>
                 </a>
             </div>
-            <div class="username">
-                <span class="user"></span>
-            </div>
         </div>
-        <div class="tooltips">
+        <div class="tooltips margin-top__zero">
             <div class="mdl-tooltip" data-mdl-for="logout-button">
                 Logout
             </div>
