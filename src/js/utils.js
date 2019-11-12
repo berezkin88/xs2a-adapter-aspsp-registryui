@@ -36,7 +36,6 @@ function editableCells(e) {
 
     for (let i = 1, till = (rowCells.length - 2); i < till; i++) {
         rowCells[i].setAttribute("contenteditable", true);
-
     }
 
     approach.forEach(element => {
