@@ -31,7 +31,7 @@
     "run-sequence": "^2.2.1"
   },
   "scripts": {
-    "test": "test"
+    "start": "gulp listener & node ../testserver/index.js"
   },
   "config": {
     "src": {
