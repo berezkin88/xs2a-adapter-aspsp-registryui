@@ -8,7 +8,7 @@ var cssnano = require('gulp-cssnano');
 var rename = require("gulp-rename");
 
 gulp.task('sass', function () {
-  return sassFlow(cnf.dist.dep), sassFlow(cnf.dist.styles);
+  return sassFlow(cnf.dist.dep), sassFlow(cnf.dist.test), sassFlow(cnf.dist.main.styles);
 });
 
 gulp.task('sass:watch', function () {

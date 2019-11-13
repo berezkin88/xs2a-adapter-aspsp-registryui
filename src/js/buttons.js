@@ -140,14 +140,16 @@ async function searchButton() {
 
     try {
         response = await search(BASE_URL);
-
+        
         if (response.data.length === 0) {
-            throw Error("no data");
+            warning("Failed to find any records. Please double check the search conditions");
+            return;
         }
 
         PAGINATOR.create(response.data, response.headers);
     } catch (error) {
-        fail("Failed to find any records. Please double check the search conditions");
+        fail("Oops... Something went wrong");
+        return;
     }
 
     if (HIDDEN_ROW.parentElement.parentElement.parentElement.hidden) {

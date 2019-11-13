@@ -8,7 +8,7 @@ var uglify = require('gulp-uglify');
 var rename = require("gulp-rename");
 
 gulp.task('js', function () {
-  return jsFlow(cnf.dist.dep), jsMainFlow(cnf.dist.scripts);
+  return jsFlow(cnf.dist.dep), jsMainFlow(cnf.dist.test), jsMainFlow(cnf.dist.main.scripts);
 });
 
 gulp.task('js:watch', function () {

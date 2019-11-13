@@ -41,9 +41,12 @@
     },
     "dist": {
       "dep": "dist",
-      "styles": "../../javaprojects/aspsp-registry-manager/registry-manager-rest-server/src/main/resources/static",
-      "scripts": "../../javaprojects/aspsp-registry-manager/registry-manager-rest-server/src/main/resources/static",
-      "html": "../../javaprojects/aspsp-registry-manager/registry-manager-rest-server/src/main/resources/templates"
+      "main": {
+        "styles": "../../javaprojects/aspsp-registry-manager/registry-manager-rest-server/src/main/resources/static",
+        "scripts": "../../javaprojects/aspsp-registry-manager/registry-manager-rest-server/src/main/resources/static",
+        "html": "../../javaprojects/aspsp-registry-manager/registry-manager-rest-server/src/main/resources/templates"
+      },
+      "test": "../testserver/resources/static"
     }
   },
   "browserslist": [

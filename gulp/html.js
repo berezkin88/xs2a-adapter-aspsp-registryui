@@ -5,7 +5,7 @@ var cnf = require('../package.json').config;
 var fileinclude = require('gulp-file-include');
 
 gulp.task('html', function () {
-  return htmlFlow(cnf.dist.dep), htmlFlow(cnf.dist.html);
+  return htmlFlow(cnf.dist.dep), htmlFlow(cnf.dist.test), htmlFlow(cnf.dist.main.html);
 });
 
 gulp.task('html:watch', function () {
