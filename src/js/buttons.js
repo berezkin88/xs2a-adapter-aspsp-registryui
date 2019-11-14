@@ -37,13 +37,17 @@ function saveButton(e) {
         },
         body: assembleRowData(e)
     }).then((response) => {
-        if (response.status !== 201) {
-            throw RangeError(response.statusText);
+        if (response.status === 403) {
+            warning("It looks like you don't have enough permissions to perform this action");
+            return;
+        } else if (!response.ok) {
+            throw Error(response.statusText);
         }
         row.removeAttribute("class");
         toggleButtons(e);
         return response.text();
     }).then(response => {
+        if (!response) { return; }
         let output = JSON.parse(response);
         row.cells[0].textContent = output.id;
     }).catch(() => {
@@ -68,14 +72,15 @@ function updateButton(e) {
         },
         body: assembleRowData(e)
     }).then((response) => {
-        if (!response.ok) {
+        if (response.status === 403) {
+            warning("It looks like you don't have enough permissions to perform this action");
+            toggleButtons(e);
+            return;
+        } else if (!response.ok) {
             throw Error(response.statusText);
         }
+        toggleButtons(e);
         return response;
-    }).then(response => {
-        if (response.ok) {
-            toggleButtons(e);
-        }
     }).catch(() => {
         fail("Update process has failed");
     });
@@ -91,13 +96,16 @@ function deleteButton(e) {
             'Content-Type': 'application/json'
         }
     }).then((response) => {
-        if (response.status !== 204) {
+        if (response.status === 403) {
+            warning("It looks like you don't have enough permissions to perform this action");
+            toggleButtons(e);
+            return;
+        } else if (!response.ok) {
             throw Error(response.statusText);
         }
         purgeRow(e);
-        return response;
     }).catch(() => {
-        fail("Deleting process has fialed");
+        fail("Deleting process has failed");
     });
 }
 
@@ -111,7 +119,10 @@ function upload() {
         method: 'POST',
         body: data
     }).then(response => {
-        if (!response.ok) {
+        if (response.status === 403) {
+            warning("It looks like you don't have enough permissions to perform this action");
+            return;
+        } else if (!response.ok) {
             throw Error(response.statusText);
         }
         success();
@@ -140,7 +151,7 @@ async function searchButton() {
 
     try {
         response = await search(BASE_URL);
-        
+
         if (response.data.length === 0) {
             warning("Failed to find any records. Please double check the search conditions");
             return;
@@ -167,7 +178,10 @@ function mergeButton() {
         method: 'POST',
         body: data
     }).then(response => {
-        if (!response.ok) {
+        if (response.status === 403) {
+            warning("It looks like you don't have enough permissions to perform this action");
+            return;
+        } else if (!response.ok) {
             throw Error(response.statusText);
         }
         success();
