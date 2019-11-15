@@ -15,6 +15,8 @@ function addRow() {
     if (HIDDEN_ROW.parentElement.parentElement.parentElement.hidden) {
         showTable();
     }
+
+    warning("Bank Name, URL, Adapter Id, Bank Code or BIC must not be empty");
     // updating MDL library for making Tooltip working
     componentHandler.upgradeAllRegistered();
 }
@@ -30,7 +32,7 @@ function saveButton(e) {
         }
     }
 
-    fetch("/v1/aspsps/", {
+    fetch(BASE, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -48,6 +50,7 @@ function saveButton(e) {
         return response.text();
     }).then(response => {
         if (!response) { return; }
+        (async () => { COUNTUP.update(await getTotal()); })()
         let output = JSON.parse(response);
         row.cells[0].textContent = output.id;
     }).catch(() => {
@@ -65,7 +68,7 @@ function updateButton(e) {
         }
     }
 
-    fetch("/v1/aspsps/", {
+    fetch(BASE, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -88,7 +91,7 @@ function updateButton(e) {
 
 function deleteButton(e) {
     let uuidCell = e.parentElement.parentElement.cells[0].innerText;
-    let url = "/v1/aspsps/" + uuidCell;
+    let url = BASE + "/" + uuidCell;
 
     fetch(url, {
         method: 'DELETE',
@@ -104,6 +107,7 @@ function deleteButton(e) {
             throw Error(response.statusText);
         }
         purgeRow(e);
+        (async () => { COUNTUP.update(await getTotal()); })()
     }).catch(() => {
         fail("Deleting process has failed");
     });
@@ -115,7 +119,7 @@ function upload() {
 
     data.append("file", file);
 
-    fetch("/v1/aspsps/csv/upload", {
+    fetch(BASE + "/csv/upload", {
         method: 'POST',
         body: data
     }).then(response => {
@@ -126,6 +130,7 @@ function upload() {
             throw Error(response.statusText);
         }
         success();
+        (async () => { COUNTUP.update(await getTotal()); })()
     }).catch(() => {
         fail("Failed to upload the file. It looks like the file has an inappropriate format.");
     })
@@ -136,7 +141,7 @@ async function searchButton() {
 
     let response;
 
-    BASE_URL = "/v1/aspsps/?";
+    BASE_URL = BASE + "/?";
 
     let data = document.querySelector(".search-form");
 
@@ -174,7 +179,7 @@ function mergeButton() {
 
     data.append("file", file);
 
-    fetch("/v1/aspsps/csv/merge", {
+    fetch(BASE + "/csv/merge", {
         method: 'POST',
         body: data
     }).then(response => {
@@ -185,6 +190,7 @@ function mergeButton() {
             throw Error(response.statusText);
         }
         success();
+        (async () => { COUNTUP.update(await getTotal()); })()
     }).catch(() => {
         fail("Failed to upload and merge the file.");
     })

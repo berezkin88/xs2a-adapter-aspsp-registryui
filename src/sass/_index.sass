@@ -31,21 +31,14 @@ h2
     max-width: 100%
     overflow-x: scroll
 
+.invalid
+    background-color: rgba(255, 152, 0, 0.2)
+
 .hidden
     display: none
 
 .welcome-message
     text-align: center
-
-.material-icons
-    cursor: pointer
-    transition: opacity 0.5s
-    opacity: 0.4
-    z-index: 1
-
-.material-icons:hover
-    transition: opacity 0.5s
-    opacity: 1
 
 [id^='update'],
 [id^='delete']
@@ -58,15 +51,9 @@ h2
     grid-row-gap: 0
     justify-items: left
 
-#embedded
-    margin: 0
-
-#redirect
-    margin: 0
-
-#decoupled
-    margin: 0
-
+#embedded,
+#redirect,
+#decoupled,
 #oauth
     margin: 0
 
@@ -89,3 +76,13 @@ h2
 
 .mdl-data-table
     width: 100%
+
+.material-icons
+    cursor: pointer
+    transition: opacity 0.5s
+    opacity: 0.4
+    z-index: 1
+
+.material-icons:hover
+    transition: opacity 0.5s
+    opacity: 1

@@ -9,7 +9,6 @@ function forceValidation() {
         for (let cell of row.cells) {
             if (cell.classList.contains("invalid")) {
                 cell.classList.remove("invalid");
-                cell.style.background = "none";
                 console.log("Cell with content '" + cell.textContent + "' is made valid");
             }
         }
