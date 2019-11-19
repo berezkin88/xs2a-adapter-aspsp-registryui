@@ -50,9 +50,9 @@ function saveButton(e) {
         return response.text();
     }).then(response => {
         if (!response) { return; }
-        (async () => { COUNTUP.update(await getTotal()); })()
         let output = JSON.parse(response);
         row.cells[0].textContent = output.id;
+        COUNTUP.update(COUNTUP.endVal + 1);
     }).catch(() => {
         fail("Saving process has failed");
     });
@@ -107,7 +107,7 @@ function deleteButton(e) {
             throw Error(response.statusText);
         }
         purgeRow(e);
-        (async () => { COUNTUP.update(await getTotal()); })()
+        COUNTUP.update(COUNTUP.endVal - 1);
     }).catch(() => {
         fail("Deleting process has failed");
     });
@@ -171,6 +171,8 @@ async function searchButton() {
     if (HIDDEN_ROW.parentElement.parentElement.parentElement.hidden) {
         showTable();
     }
+
+    forceValidation();
 }
 
 function mergeButton() {
@@ -216,6 +218,8 @@ async function showMore() {
     let output = await search(nextPageUrl);
 
     PAGINATOR.addRow(output.data);
+
+    forceValidation();
 }
 
 function editButton(e) {

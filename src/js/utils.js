@@ -4,15 +4,20 @@ function toUpper(element) {
 
 function forceValidation() {
     let rows = document.querySelectorAll("tr");
+    const makeValid = (element) => {
+        if (element.classList.contains("invalid")) {
+            element.classList.remove("invalid");
+        }
+    }
 
     rows.forEach((row) => {
-        for (let cell of row.cells) {
-            if (cell.classList.contains("invalid")) {
-                cell.classList.remove("invalid");
-                console.log("Cell with content '" + cell.textContent + "' is made valid");
+        if (!row.classList.contains("hidden")) {
+            for (let cell of row.cells) {
+                makeValid(cell);
             }
         }
     })
+
 }
 
 // Manipulating cells
