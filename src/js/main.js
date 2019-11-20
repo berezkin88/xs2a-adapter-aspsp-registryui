@@ -7,3 +7,4 @@
 //=require peginator.js
 //=require counter.js
 //=require countUp.min.js
+//=require validationHandler.js

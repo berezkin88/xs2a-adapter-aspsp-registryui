@@ -3,16 +3,17 @@
     <div class="validation-obfuscator">
         <div class="validation-modal">
             <h3 class="validation--header">Validation report</h3>
-            <div class="verdict">Validation verdict: <span id="verdict"></span></div>
-            <div class="not-valid-amount">Amount of not valid records: <span id="records-amount"></span></div>
-            <div class="example">Example:</div>
-            <textarea class="display" readonly>
+            <div class="spinner"><div class="mdl-spinner mdl-js-spinner is-active"></div></div>
+            <div class="verdict hidden">Validation verdict: <span id="verdict"></span></div>
+            <div class="not-valid-amount hidden">Amount of not valid records: <span id="records-amount"></span></div>
+            <div class="example hidden">Example:</div>
+            <textarea class="display hidden" readonly>
 
             </textarea>
             <div class="process-buttons">
-                <button class="reject mdl-button mdl-js-button mdl-button--accent padding__top">reject</button>
-                <button class="report mdl-button mdl-js-button padding__top">report</button>
-                <button class="proceed mdl-button mdl-js-button mdl-button--primary padding__top">proceed</button>
+                <button class="reject mdl-button mdl-js-button mdl-button--accent padding__top" onclick="rejectButton();">reject</button>
+                <button class="report mdl-button mdl-js-button padding__top" onclick="reportButton();">report</button>
+                <button class="proceed mdl-button mdl-js-button mdl-button--primary padding__top" onclick="proceedButton();">proceed</button>
             </div>
         </div>
     </div>
@@ -23,7 +24,7 @@
             <nav class="mdl-navigation">
                 <div class="upload-button" id="upload">
                     <input type="file" name="import file" id="import-field" hidden>
-                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab">
+                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab" onclick="HIT_BUTTON = 'UPLOAD';">
                         <i class="material-icons">
                             cloud_upload
                         </i>
@@ -41,7 +42,7 @@
                 </div>
                 <div class="merge-button" id="merge">
                     <input type="file" name="merge file" id="merge-field" hidden>
-                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab mdl-button--primary">
+                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab mdl-button--primary" onclick="HIT_BUTTON = 'MERGE';">
                         <i class="material-icons">
                             merge_type
                         </i>

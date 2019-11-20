@@ -210,3 +210,30 @@ function buildRow(data) {
     }
 }
 // End of row part
+
+const toggleModal = () => {
+    const modal = document.querySelector(".validation-layout");
+    const spinner = document.querySelector(".spinner");
+    const verdict = document.querySelector(".verdict");
+    const amount = document.querySelector(".not-valid-amount");
+    const example = document.querySelector(".example");
+    const display = document.querySelector(".display");
+
+    verdict.classList.add("hidden");
+    amount.classList.add("hidden");
+    example.classList.add("hidden");
+    display.classList.add("hidden");
+
+    spinner.classList.remove("hidden");
+
+    modal.classList.toggle("hidden");
+}
+
+const createReport = (data) => {
+    const temp = new Blob([JSON.stringify(data)]);
+    const virtualLink = document.createElement("a");
+    const virtualUrl = URL.createObjectURL(temp);
+    virtualLink.href = virtualUrl;
+    virtualLink.download = "report.json";
+    virtualLink.click();
+}

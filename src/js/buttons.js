@@ -116,8 +116,6 @@ function upload() {
     let file = FILE_UPLOAD_FIELD.files[0];
     let data = new FormData();
 
-    HIT_BUTTON = "UPLOAD";
-
     data.append("file", file);
 
     fetch(BASE + "/csv/upload", {
@@ -180,8 +178,6 @@ function merge() {
     let file = FILE_MERGE_FIELD.files[0];
     let data = new FormData();
 
-    HIT_BUTTON = "MERGE";
-
     data.append("file", file);
 
     fetch(BASE + "/csv/merge", {
@@ -217,6 +213,8 @@ const validate = () => {
 
     data.append("file", file);
 
+    toggleModal();
+
     fetch(BASE + "/csv/validate", {
         method: 'POST',
         body: data
@@ -224,7 +222,7 @@ const validate = () => {
         if (response.status === 403) {
             warning("It looks like you don't have enough permissions to perform this action");
             return;
-        } else if (!response.ok || response.status !== 400) {
+        } else if (!response.ok && response.status !== 400) {
             throw Error(response.statusText);
         }
         success();
@@ -326,4 +324,14 @@ const proceedButton = () => {
     if (HIT_BUTTON === "MERGE") {
         merge();
     }
+
+    toggleModal();
+}
+
+const reportButton = () => {
+    createReport(VALIDATOR.data);
+} 
+
+const rejectButton = () => {
+    toggleModal();
 }

@@ -20,10 +20,22 @@
 .validation--header
     text-align: center
 
+.spinner
+    display: flex
+    justify-content: center
+    & > *
+        margin-top: 0
+        & > *
+            margin-top: 0
+            & > *
+                margin-top: 0
+
 .process-buttons
     margin: 1.5em 0
     display: flex
     justify-content: space-around
+    & > button
+        width: 101.233px
 
 .process-buttons > button:nth-child(2)
     margin: 0 3em
@@ -147,3 +159,7 @@ h1
 .mdl-layout
     width: unset
     height: unset
+
+.mdl-spinner
+    width: 150px
+    height: 150px
