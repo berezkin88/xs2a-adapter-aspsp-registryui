@@ -8,4 +8,5 @@ function initGlobals() {
     window.COUNTER = 0;
     window.BASE = "/v1/aspsps";
     window.BASE_URL = "";
+    window.HIT_BUTTON = "NONE";
 }

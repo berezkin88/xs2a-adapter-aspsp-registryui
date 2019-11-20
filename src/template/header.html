@@ -1,4 +1,22 @@
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<div class="validation-layout margin-top__zero hidden">
+    <div class="validation-obfuscator">
+        <div class="validation-modal">
+            <h3 class="validation--header">Validation report</h3>
+            <div class="verdict">Validation verdict: <span id="verdict"></span></div>
+            <div class="not-valid-amount">Amount of not valid records: <span id="records-amount"></span></div>
+            <div class="example">Example:</div>
+            <textarea class="display" readonly>
+
+            </textarea>
+            <div class="process-buttons">
+                <button class="reject mdl-button mdl-js-button mdl-button--accent padding__top">reject</button>
+                <button class="report mdl-button mdl-js-button padding__top">report</button>
+                <button class="proceed mdl-button mdl-js-button mdl-button--primary padding__top">proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="flex-nav margin-top__zero">
     <div class="mdl-layout--fixed-drawer mdl-layout mdl-js-layout">
         <div class="mdl-layout__drawer animated is-hidden">

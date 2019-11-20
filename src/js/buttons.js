@@ -49,7 +49,6 @@ function saveButton(e) {
         toggleButtons(e);
         return response.text();
     }).then(response => {
-        if (!response) { return; }
         let output = JSON.parse(response);
         row.cells[0].textContent = output.id;
         COUNTUP.update(COUNTUP.endVal + 1);
@@ -117,6 +116,8 @@ function upload() {
     let file = FILE_UPLOAD_FIELD.files[0];
     let data = new FormData();
 
+    HIT_BUTTON = "UPLOAD";
+
     data.append("file", file);
 
     fetch(BASE + "/csv/upload", {
@@ -175,9 +176,11 @@ async function searchButton() {
     forceValidation();
 }
 
-function mergeButton() {
+function merge() {
     let file = FILE_MERGE_FIELD.files[0];
     let data = new FormData();
+
+    HIT_BUTTON = "MERGE";
 
     data.append("file", file);
 
@@ -206,6 +209,31 @@ async function search(URI) {
     output.data = JSON.parse(await response.text());
 
     return output;
+}
+
+const validate = () => {
+    let file = FILE_UPLOAD_FIELD.files[0];
+    let data = new FormData();
+
+    data.append("file", file);
+
+    fetch(BASE + "/csv/validate", {
+        method: 'POST',
+        body: data
+    }).then(response => {
+        if (response.status === 403) {
+            warning("It looks like you don't have enough permissions to perform this action");
+            return;
+        } else if (!response.ok || response.status !== 400) {
+            throw Error(response.statusText);
+        }
+        success();
+        return response.text()
+    }).then(response => {
+        validationResponseHandler(JSON.parse(response));
+    }).catch(() => {
+        fail("Validation process failed, please check if you provided an appropriately formatted CSV file");
+    })
 }
 // End of requests part
 
@@ -289,4 +317,13 @@ function showButton() {
 
     drawer.classList.toggle("is-hidden");
     icon.classList.toggle("rotate");
+}
+
+const proceedButton = () => {
+    if (HIT_BUTTON === "UPLOAD") {
+        upload();
+    } 
+    if (HIT_BUTTON === "MERGE") {
+        merge();
+    }
 }
