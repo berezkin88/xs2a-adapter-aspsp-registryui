@@ -1,6 +1,6 @@
 function validateBankName(element) {
     let target = element.textContent;
-    let regex = /^[\w\-\s\WäöüÄÖÜß]+$/;
+    let regex = /^[\w\s\WäöüÄÖÜß]+$/;
 
     if (!regex.test(target)) {
         element.classList.add("invalid");

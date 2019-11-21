@@ -320,8 +320,7 @@ function showButton() {
 const proceedButton = () => {
     if (HIT_BUTTON === "UPLOAD") {
         upload();
-    } 
-    if (HIT_BUTTON === "MERGE") {
+    } else if (HIT_BUTTON === "MERGE") {
         merge();
     }
 

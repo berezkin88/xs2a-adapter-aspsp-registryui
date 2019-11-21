@@ -1,3 +1,4 @@
+
 const VALIDATOR = {
     data: null
 }
@@ -28,7 +29,7 @@ const validationResponseHandler = (data) => {
         example.classList.remove("hidden");
         document.querySelector(".example").classList.remove("hidden");
         amount.textContent = data.totalNotValidRecords;
-        
+
         example.textContent = buildString(data.aspspValidationErrorReports);
     } else {
         verdict.classList.add("valid");
@@ -43,7 +44,7 @@ const validationResponseHandler = (data) => {
 const buildString = (input) => {
     let result = "";
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0, limit = Math.min(3, input.length); i < limit; i++) {
         result += "line number: " + input[i].lineNumberInCsv + "\n"
             + "validation errors: \n";
 
