@@ -8,3 +8,4 @@
 //=require counter.js
 //=require countUp.min.js
 //=require validationHandler.js
+//=require requests.js

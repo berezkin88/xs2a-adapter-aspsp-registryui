@@ -6,12 +6,13 @@ const VALIDATOR = {
 const validationResponseHandler = (data) => {
     VALIDATOR.data = data;
 
-    let isValid = data.validationResult === "VALID";
+    let isValid = data.fileValidationReport.validationResult === "VALID";
 
-    const verdict = document.querySelector("#verdict");
-    const amount = document.querySelector("#records-amount");
-    const example = document.querySelector(".display");
     const spinner = document.querySelector(".spinner");
+    const verdict = document.querySelector("#verdict");
+    const report = document.querySelector(".validation-report");
+    const amountNotValid = document.querySelector("#records-amount");
+    const example = document.querySelector(".display");
 
     if (!data) {
         fail("Oops... something went wrong. Please try again to validate");
@@ -25,18 +26,17 @@ const validationResponseHandler = (data) => {
     if (!isValid) {
         verdict.classList.add("not-valid");
         verdict.parentElement.classList.remove("hidden");
-        amount.parentElement.classList.remove("hidden");
-        example.classList.remove("hidden");
-        document.querySelector(".example").classList.remove("hidden");
-        amount.textContent = data.totalNotValidRecords;
+        report.classList.remove("hidden");
 
-        example.textContent = buildString(data.aspspValidationErrorReports);
+        amountNotValid.textContent = data.fileValidationReport.totalNotValidRecords;
+        example.textContent = buildString(data.fileValidationReport.aspspValidationErrorReports);
+
+        mergeOrUpload(data);
     } else {
         verdict.classList.add("valid");
         verdict.parentElement.classList.remove("hidden");
-        amount.parentElement.classList.add("hidden");
-        example.classList.add("hidden");
-        document.querySelector(".example").classList.add("hidden");
+
+        mergeOrUpload(data);
     }
 
 }
@@ -60,4 +60,26 @@ const buildString = (input) => {
     }
 
     return result;
+}
+
+const mergeOrUpload = (input) => {
+    const merge = document.querySelector(".merge-request");
+    const newRecords = document.querySelector("#new-records");
+    const altered = document.querySelector("#altered");
+    
+    const upload = document.querySelector(".upload-request");
+    const csvRecords = document.querySelector("#csv-quantity");
+    const bdSize = document.querySelector("#db-size");
+
+    if (HIT_BUTTON === "MERGE") {
+        merge.classList.remove("hidden");
+
+        newRecords.textContent = input.numberOfNewRecords;
+        altered.textContent = `${input.difference.length} (${(input.difference.length / COUNTUP.endVal) * 100})%`;
+    } else if (HIT_BUTTON === "UPLOAD") {
+        upload.classList.remove("hidden");
+
+        csvRecords.textContent = input.csvFileRecordsNumber;
+        bdSize.textContent = input.dbRecordsNumber;
+    }
 }

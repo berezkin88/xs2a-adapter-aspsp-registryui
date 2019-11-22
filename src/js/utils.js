@@ -215,14 +215,12 @@ const toggleModal = () => {
     const modal = document.querySelector(".validation-layout");
     const spinner = document.querySelector(".spinner");
     const verdict = document.querySelector(".verdict");
-    const amount = document.querySelector(".not-valid-amount");
-    const example = document.querySelector(".example");
-    const display = document.querySelector(".display");
+    const merge = document.querySelector(".merge-request");
+    const upload = document.querySelector(".upload-request");
 
     verdict.classList.add("hidden");
-    amount.classList.add("hidden");
-    example.classList.add("hidden");
-    display.classList.add("hidden");
+    merge.classList.add("hidden");
+    upload.classList.add("hidden");
 
     spinner.classList.remove("hidden");
 
