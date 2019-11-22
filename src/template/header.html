@@ -7,14 +7,19 @@
                 <div class="mdl-spinner mdl-js-spinner is-active"></div>
             </div>
             <div class="verdict hidden">Validation verdict: <span id="verdict"></span></div>
+            <div class="validation-report hidden">
+                <div class="not-valid-amount">Amount of not valid records: <span id="records-amount"></span></div>
+                <div class="example">Example:</div>
+                <textarea class="display" readonly></textarea>
+            </div>
             <div class="merge-request hidden">
                 <div class="new-reocrds">Amount of new enteties: <span id="new-records"></span></div>
                 <div class="altered">Amount of altered enteties: <span id="altered"></span></div>
                 <div class="process-buttons">
                     <button class="reject mdl-button mdl-js-button mdl-button--accent padding__top"
-                        onclick="rejectButton();">cancel</button>
-                    <button class="proceed mdl-button mdl-js-button mdl-button--primary padding__top"
-                        onclick="proceedButton();">confirm</button>
+                        onclick="rejectCancelButton();">cancel</button>
+                    <button class="confirm mdl-button mdl-js-button mdl-button--primary padding__top"
+                        onclick="confirmButton();">confirm</button>
                 </div>
             </div>
             <div class="upload-request hidden">
@@ -22,17 +27,12 @@
                 <div class="db-size">Amount of records in the database: <span id="db-size"></span></div>
                 <div class="process-buttons">
                     <button class="reject mdl-button mdl-js-button mdl-button--accent padding__top"
-                        onclick="rejectButton();">reject</button>
+                        onclick="rejectCancelButton();">reject</button>
                     <button class="report mdl-button mdl-js-button padding__top"
                         onclick="reportButton();">report</button>
                     <button class="proceed mdl-button mdl-js-button mdl-button--primary padding__top"
                         onclick="proceedButton();">proceed</button>
                 </div>
-            </div>
-            <div class="validation-report hidden">
-                <div class="not-valid-amount">Amount of not valid records: <span id="records-amount"></span></div>
-                <div class="example">Example:</div>
-                <textarea class="display hidden" readonly></textarea>
             </div>
         </div>
     </div>

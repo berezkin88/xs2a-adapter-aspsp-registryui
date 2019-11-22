@@ -104,19 +104,23 @@ function showButton() {
 }
 
 const proceedButton = () => {
-    if (HIT_BUTTON === "UPLOAD") {
-        upload();
-    } else if (HIT_BUTTON === "MERGE") {
-        merge();
-    }
+
+    upload();
+
+    toggleModal();
+}
+
+const confirmButton = () => {
+
+    merge();
 
     toggleModal();
 }
 
 const reportButton = () => {
     createReport(VALIDATOR.data);
-} 
+}
 
-const rejectButton = () => {
+const rejectCancelButton = () => {
     toggleModal();
 }

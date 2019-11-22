@@ -1,4 +1,4 @@
-function saveButton(e) {
+const saveButton = (e) => {
     let row = e.parentElement.parentElement;
 
     for (let cell of row.cells) {
@@ -33,7 +33,7 @@ function saveButton(e) {
     });
 }
 
-function updateButton(e) {
+const updateButton = (e) => {
     let row = e.parentElement.parentElement;
 
     for (let cell of row.cells) {
@@ -64,7 +64,7 @@ function updateButton(e) {
     });
 }
 
-function deleteButton(e) {
+const deleteButton = (e) => {
     let uuidCell = e.parentElement.parentElement.cells[0].innerText;
     let url = BASE + "/" + uuidCell;
 
@@ -88,7 +88,7 @@ function deleteButton(e) {
     });
 }
 
-function upload() {
+const upload = () => {
     let file = FILE_UPLOAD_FIELD.files[0];
     let data = new FormData();
 
@@ -111,7 +111,7 @@ function upload() {
     })
 }
 
-async function searchButton() {
+const searchButton = async () => {
     clearTable();
 
     let response;
@@ -150,7 +150,7 @@ async function searchButton() {
     forceValidation();
 }
 
-function merge() {
+const merge = () => {
     let file = FILE_MERGE_FIELD.files[0];
     let data = new FormData();
 
@@ -173,7 +173,7 @@ function merge() {
     })
 }
 
-async function search(URI) {
+const search = async (URI) => {
     let output = {};
 
     let response = await fetch(URI);
@@ -183,7 +183,7 @@ async function search(URI) {
     return output;
 }
 
-const validate = () => {
+const validateUpload = () => {
     let file = FILE_UPLOAD_FIELD.files[0];
     let data = new FormData();
 
@@ -191,7 +191,7 @@ const validate = () => {
 
     toggleModal();
 
-    fetch(BASE + "/csv/validate", {
+    fetch(BASE + "/csv/validate/upload", {
         method: 'POST',
         body: data
     }).then(response => {
@@ -201,7 +201,32 @@ const validate = () => {
         } else if (!response.ok && response.status !== 400) {
             throw Error(response.statusText);
         }
-        success();
+        return response.text()
+    }).then(response => {
+        validationResponseHandler(JSON.parse(response));
+    }).catch(() => {
+        fail("Validation process failed, please check if you provided an appropriately formatted CSV file");
+    })
+}
+
+const validateMerge = () => {
+    let file = FILE_UPLOAD_FIELD.files[0];
+    let data = new FormData();
+
+    data.append("file", file);
+
+    toggleModal();
+
+    fetch(BASE + "/csv/validate/merge", {
+        method: 'POST',
+        body: data
+    }).then(response => {
+        if (response.status === 403) {
+            warning("It looks like you don't have enough permissions to perform this action");
+            return;
+        } else if (!response.ok && response.status !== 400) {
+            throw Error(response.statusText);
+        }
         return response.text()
     }).then(response => {
         validationResponseHandler(JSON.parse(response));

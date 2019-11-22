@@ -20,11 +20,11 @@ const validationResponseHandler = (data) => {
         return;
     }
     
-    verdict.textContent = data.validationResult;
+    verdict.textContent = data.fileValidationReport.validationResult;
     spinner.classList.add("hidden");
 
     if (!isValid) {
-        verdict.classList.add("not-valid");
+        verdict.classList.add("valid", "not-valid");
         verdict.parentElement.classList.remove("hidden");
         report.classList.remove("hidden");
 
@@ -33,7 +33,7 @@ const validationResponseHandler = (data) => {
 
         mergeOrUpload(data);
     } else {
-        verdict.classList.add("valid");
+        verdict.classList.replace("not-valid", "valid");
         verdict.parentElement.classList.remove("hidden");
 
         mergeOrUpload(data);
@@ -66,7 +66,7 @@ const mergeOrUpload = (input) => {
     const merge = document.querySelector(".merge-request");
     const newRecords = document.querySelector("#new-records");
     const altered = document.querySelector("#altered");
-    
+
     const upload = document.querySelector(".upload-request");
     const csvRecords = document.querySelector("#csv-quantity");
     const bdSize = document.querySelector("#db-size");
@@ -75,7 +75,7 @@ const mergeOrUpload = (input) => {
         merge.classList.remove("hidden");
 
         newRecords.textContent = input.numberOfNewRecords;
-        altered.textContent = `${input.difference.length} (${(input.difference.length / COUNTUP.endVal) * 100})%`;
+        altered.textContent = `${input.difference.length} (${(input.difference.length / COUNTUP.endVal) * 100}%)`;
     } else if (HIT_BUTTON === "UPLOAD") {
         upload.classList.remove("hidden");
 

@@ -1,26 +1,21 @@
 function fail(message) {
-    let messageBlock = FAILURE.querySelector(".message");
-    messageBlock.textContent = message;
-    
-    setTimeout(() => { FAILURE.style.opacity = 1 }, 500);
-
-    setTimeout(() => { FAILURE.style.opacity = 0 }, 8000);
+    showMessage(FAILURE, 8000, message);
 }
 
-function success() {
-    setTimeout(() => { SUCCESS.style.opacity = 1 }, 500);
-
-    setTimeout(() => { SUCCESS.style.opacity = 0 }, 8000);
+function success(message) {
+    showMessage(SUCCESS, 8000, message);
 }
 
 function warning(message) {
-    let messageBlock = WARNING.querySelector(".message");
+    showMessage(WARNING, 8000, message);
+}
 
-    if (message) {
-        messageBlock.textContent = message;
-    }
+const showMessage = (messageType, duration, message) => {
+    let messageBlock = messageType.querySelector(".message");
 
-    setTimeout(() => { WARNING.style.opacity = 1 }, 500);
+    messageBlock.textContent = message;
 
-    setTimeout(() => { WARNING.style.opacity = 0 }, 8000);
+    setTimeout(() => { messageType.style.opacity = 1 }, 500);
+
+    setTimeout(() => { messageType.style.opacity = 0 }, duration);
 }

@@ -1,8 +1,8 @@
-function toUpper(element) {
+const toUpper = (element) => {
     element.innerText = element.innerText.toUpperCase();
 }
 
-function forceValidation() {
+const forceValidation = () => {
     let rows = document.querySelectorAll("tr");
     const makeValid = (element) => {
         if (element.classList.contains("invalid")) {
@@ -21,7 +21,7 @@ function forceValidation() {
 }
 
 // Manipulating cells
-function uneditableCells(e) {
+const uneditableCells = (e) => {
     let rowCells = e.parentElement.parentElement.cells;
     let approach = e.parentElement.parentElement.querySelectorAll('input');
 
@@ -34,7 +34,7 @@ function uneditableCells(e) {
     })
 }
 
-function editableCells(e) {
+const editableCells = (e) => {
     let rowCells = e.parentElement.parentElement.cells;
     let approach = e.parentElement.parentElement.querySelectorAll('input');
 
@@ -49,7 +49,7 @@ function editableCells(e) {
 // End of cells part
 
 // Manipulating tables
-function showTable() {
+const showTable = () => {
     let table = HIDDEN_ROW.parentElement.parentElement.parentElement;
     let message = document.querySelector(".welcome-message");
 
@@ -57,7 +57,7 @@ function showTable() {
     message.hidden = true;
 }
 
-function clearTable() {
+const clearTable = () => {
     let body = document.querySelectorAll("tbody>tr");
 
     if (body.length > 1) {
@@ -65,7 +65,7 @@ function clearTable() {
     }
 }
 
-function checkMorePart() {
+const checkMorePart = () => {
     let showMore = document.querySelector(".show-more");
 
     if (!showMore.hidden) {
@@ -73,7 +73,7 @@ function checkMorePart() {
     }
 }
 
-function clearContent() {
+const clearContent = () => {
     clearTable();
     checkMorePart();
 
@@ -81,13 +81,13 @@ function clearContent() {
 }
 // End of table part
 
-function onEnterPress(event) {
+const onEnterPress = (event) => {
     if (event.keyCode === 13) {
         searchButton();
     }
 }
 
-function addTooltips(e) {
+const addTooltips = (e) => {
     let editId = "edit-";
     let updateId = "update-";
     let deleteId = "delete-";
@@ -124,13 +124,13 @@ function addTooltips(e) {
 }
 
 // Manipulating rows
-function purgeRow(e) {
+const purgeRow = (e) => {
     let tableRow = e.parentElement.parentElement;
 
     tableRow.remove();
 }
 
-function assembleRowData(e) {
+const assembleRowData = (e) => {
     let row = e.parentNode.parentNode;
 
     let object = {};
@@ -145,7 +145,7 @@ function assembleRowData(e) {
 
     return JSON.stringify(object);
 
-    function approachParser(data) {
+    function approachParser (data) {
         let inputs = data.querySelectorAll("input");
         let resultString = [];
 
@@ -159,7 +159,7 @@ function assembleRowData(e) {
     }
 }
 
-function buildRow(data) {
+const buildRow = (data) => {
     let clone = HIDDEN_ROW.cloneNode(true);
     clone.removeAttribute("class");
 
@@ -215,10 +215,12 @@ const toggleModal = () => {
     const modal = document.querySelector(".validation-layout");
     const spinner = document.querySelector(".spinner");
     const verdict = document.querySelector(".verdict");
+    const verdictReport = document.querySelector(".validation-report");
     const merge = document.querySelector(".merge-request");
     const upload = document.querySelector(".upload-request");
 
     verdict.classList.add("hidden");
+    verdictReport.classList.add("hidden");
     merge.classList.add("hidden");
     upload.classList.add("hidden");
 
