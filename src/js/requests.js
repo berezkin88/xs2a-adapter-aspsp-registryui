@@ -210,7 +210,7 @@ const validateUpload = () => {
 }
 
 const validateMerge = () => {
-    let file = FILE_UPLOAD_FIELD.files[0];
+    let file = FILE_MERGE_FIELD.files[0];
     let data = new FormData();
 
     data.append("file", file);
