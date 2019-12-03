@@ -1,10 +1,9 @@
 const bankName = (element) => {
     let target = element.textContent;
-    let regex = /^[\w\s\WäöüÄÖÜß]+$/;
 
-    if (!regex.test(target)) {
+    if (target === "") {
         element.classList.add("invalid");
-        warning("Bank name should be a plain text and not empty");
+        warning("Bank name should not be empty");
     } else {
         element.classList.remove("invalid");
     }
@@ -46,7 +45,7 @@ const adapterId = (element) => {
 
     if (!regex.test(target)) {
         element.classList.add("invalid");
-        warning("Adapter Id should consist of a-z, A-Z, 0-9 and a hyphen(-) only, e.g. 'Adapter-12345', and should not be emoty");
+        warning("Adapter Id should consist of a-z, A-Z, 0-9, a hyphen(-) only and ends with '...-adapter', e.g. '12345-adapter', and should not be emoty");
     } else {
         element.classList.remove("invalid");
     }
