@@ -17,7 +17,7 @@ const bic = (element) => {
     if (!regex.test(target)) {
         element.classList.add("invalid");
         if (!element.parentElement.cells[5].classList.contains("invalid")) {
-            validateBankCode(element.parentElement.cells[5]);
+            validate(bankCode, element.parentElement.cells[5]);
             return;
         }
         warning("BIC should be 6, 8 or 11 characters long and consist of word characters and numbers only and not empty");
@@ -41,7 +41,7 @@ const url = (element) => {
 
 const adapterId = (element) => {
     let target = element.textContent;
-    let regex = /^\w+-adapter$/;
+    let regex = /^[\w\-]+-adapter$/;
 
     if (!regex.test(target)) {
         element.classList.add("invalid");
@@ -58,7 +58,7 @@ const bankCode = (element) => {
     if (!regex.test(target)) {
         element.classList.add("invalid");
         if (!element.parentElement.cells[2].classList.contains("invalid")) {
-            validateBic(element.parentElement.cells[2]);
+            validate(bic, element.parentElement.cells[2]);
             return;
         }
         warning("Bank Code should be 8 digits long and consist of numbers only and not empty");

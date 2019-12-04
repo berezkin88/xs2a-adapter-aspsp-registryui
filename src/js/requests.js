@@ -3,7 +3,7 @@ const saveButton = (e) => {
 
     for (let cell of row.cells) {
         if (cell.classList.contains("invalid")) {
-            warning();
+            warning("Some data is invalid");
             return;
         }
     }
@@ -25,6 +25,9 @@ const saveButton = (e) => {
         toggleButtons(e);
         return response.text();
     }).then(response => {
+        if (!response) {
+            return;
+        }
         let output = JSON.parse(response);
         row.cells[0].textContent = output.id;
         COUNTUP.update(COUNTUP.endVal + 1);
@@ -129,8 +132,11 @@ const searchButton = async () => {
     if (data[2].value !== "")
         BASE_URL += "bankCode=" + data[2].value + "&";
 
+    if (data[3].value !== "")
+        BASE_URL += "adapterId=" + data[3].value + "&";
+
     try {
-        response = await search(BASE_URL);
+        response = await search(BASE_URL.slice(0, -1));
 
         if (response.data.length === 0) {
             warning("Failed to find any records. Please double check the search conditions");

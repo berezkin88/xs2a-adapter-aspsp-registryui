@@ -23,7 +23,7 @@ function addRow() {
 
 async function showMore() {
 
-    let pagination = "&page=" + PAGINATOR.page + "&size=" + PAGINATOR.size;
+    let pagination = "page=" + PAGINATOR.page + "&size=" + PAGINATOR.size;
 
     let nextPageUrl = BASE_URL + pagination;
 
