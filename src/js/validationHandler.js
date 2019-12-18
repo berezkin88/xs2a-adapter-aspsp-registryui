@@ -5,6 +5,12 @@ const VALIDATOR = {
 
 const validationResponseHandler = (data) => {
     VALIDATOR.data = data;
+    
+    if (!data) {
+        fail("Oops... something went wrong. Please try again to validate");
+        toggleModal();
+        return;
+    }
 
     let isValid = data.fileValidationReport.validationResult === "VALID";
 
@@ -13,12 +19,6 @@ const validationResponseHandler = (data) => {
     const report = document.querySelector(".validation-report");
     const amountNotValid = document.querySelector("#records-amount");
     const example = document.querySelector(".display");
-
-    if (!data) {
-        fail("Oops... something went wrong. Please try again to validate");
-        toggleModal();
-        return;
-    }
     
     verdict.textContent = data.fileValidationReport.validationResult;
     spinner.classList.add("hidden");

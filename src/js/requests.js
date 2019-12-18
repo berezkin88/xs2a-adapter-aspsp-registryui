@@ -111,49 +111,9 @@ const upload = () => {
         (async () => { COUNTUP.update(await getTotal()); })()
     }).catch(() => {
         fail("Failed to upload the file. It looks like the file has an inappropriate format.");
+    }).finally (() => {
+        toggleModal();
     })
-}
-
-const searchButton = async () => {
-    clearTable();
-
-    let response;
-
-    BASE_URL = BASE + "/?";
-
-    let data = document.querySelector(".search-form");
-
-    if (data[0].value !== "")
-        BASE_URL += "name=" + data[0].value.toLowerCase() + "&";
-
-    if (data[1].value !== "")
-        BASE_URL += "bic=" + data[1].value + "&";
-
-    if (data[2].value !== "")
-        BASE_URL += "bankCode=" + data[2].value + "&";
-
-    if (data[3].value !== "")
-        BASE_URL += "adapterId=" + data[3].value + "&";
-
-    try {
-        response = await search(BASE_URL.slice(0, -1));
-
-        if (response.data.length === 0) {
-            warning("Failed to find any records. Please double check the search conditions");
-            return;
-        }
-
-        PAGINATOR.create(response.data, response.headers);
-    } catch (error) {
-        fail("Oops... Something went wrong");
-        return;
-    }
-
-    if (HIDDEN_ROW.parentElement.parentElement.parentElement.hidden) {
-        showTable();
-    }
-
-    forceValidation();
 }
 
 const merge = () => {
@@ -176,6 +136,8 @@ const merge = () => {
         (async () => { COUNTUP.update(await getTotal()); })()
     }).catch(() => {
         fail("Failed to upload and merge the file.");
+    }).finally (() => {
+        toggleModal();
     })
 }
 
@@ -238,5 +200,22 @@ const validateMerge = () => {
         validationResponseHandler(JSON.parse(response));
     }).catch(() => {
         fail("Validation process failed, please check if you provided an appropriately formatted CSV file");
+    })
+}
+
+const download = () => {
+    toggleModal();
+
+    fetch("/v1/aspsps/csv/download").then(response => {
+        if (!response) {
+            throw Error(response.statusText());
+        }
+        return response.text();
+    }).then(response => {
+        createFile(response, "aspsps", "csv")
+    }).catch(error => {
+        fail("Failed to upload the file");
+    }).finally(() => {
+        toggleModal();
     })
 }

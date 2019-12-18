@@ -213,6 +213,13 @@ const buildRow = (data) => {
 
 const toggleModal = () => {
     const modal = document.querySelector(".validation-layout");
+    
+    modal.classList.toggle("hidden");
+
+    showSpinner();
+}
+
+const showSpinner = () => {
     const spinner = document.querySelector(".spinner");
     const verdict = document.querySelector(".verdict");
     const verdictReport = document.querySelector(".validation-report");
@@ -225,15 +232,24 @@ const toggleModal = () => {
     upload.classList.add("hidden");
 
     spinner.classList.remove("hidden");
-
-    modal.classList.toggle("hidden");
 }
 
-const createReport = (data) => {
-    const temp = new Blob([JSON.stringify(data)]);
+const createFile = (data, fileName, fileFormat) => {
+
+    let virtualUrl = null;
+    let temp = null;
+
+    if (fileFormat === "json") {
+        temp = new Blob([JSON.stringify(data)]);
+        virtualUrl = URL.createObjectURL(temp); 
+    } else {
+        temp = new Blob([data], {type: 'text/csv;charset=utf-8;'});
+        virtualUrl = URL.createObjectURL(temp);
+    }
+
     const virtualLink = document.createElement("a");
-    const virtualUrl = URL.createObjectURL(temp);
+     
     virtualLink.href = virtualUrl;
-    virtualLink.download = "report.json";
+    virtualLink.download = fileName + "." + fileFormat;
     virtualLink.click();
 }

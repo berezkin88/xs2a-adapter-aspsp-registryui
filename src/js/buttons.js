@@ -95,6 +95,48 @@ function redButton(e) {
     }
 }
 
+const searchButton = async () => {
+    clearTable();
+
+    let response;
+
+    BASE_URL = BASE + "/?";
+
+    let data = document.querySelector(".search-form");
+
+    if (data[0].value !== "")
+        BASE_URL += "name=" + data[0].value.toLowerCase() + "&";
+
+    if (data[1].value !== "")
+        BASE_URL += "bic=" + data[1].value + "&";
+
+    if (data[2].value !== "")
+        BASE_URL += "bankCode=" + data[2].value + "&";
+
+    if (data[3].value !== "")
+        BASE_URL += "adapterId=" + data[3].value + "&";
+
+    try {
+        response = await search(BASE_URL.slice(0, -1));
+
+        if (response.data.length === 0) {
+            warning("Failed to find any records. Please double check the search conditions");
+            return;
+        }
+
+        PAGINATOR.create(response.data, response.headers);
+    } catch (error) {
+        fail("Oops... Something went wrong");
+        return;
+    }
+
+    if (HIDDEN_ROW.parentElement.parentElement.parentElement.hidden) {
+        showTable();
+    }
+
+    forceValidation();
+}
+
 function showButton() {
     let drawer = document.querySelector(".mdl-layout__drawer");
     let icon = document.querySelector(".expand>button>i");
@@ -107,20 +149,20 @@ const proceedButton = () => {
 
     upload();
 
-    toggleModal();
+    showSpinner();
 }
 
 const confirmButton = () => {
 
     merge();
 
-    toggleModal();
+    showSpinner();
 }
 
 const reportButton = () => {
-    createReport(VALIDATOR.data);
+    createFile(VALIDATOR.data, "report", "json");
 }
 
-const rejectCancelButton = () => {
-    toggleModal();
+const downloadButton = () => {
+    download();
 }
