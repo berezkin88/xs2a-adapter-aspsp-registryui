@@ -166,3 +166,7 @@ const reportButton = () => {
 const downloadButton = () => {
     download();
 }
+
+const rejectCancelButton = () => {
+    toggleModal();
+}
