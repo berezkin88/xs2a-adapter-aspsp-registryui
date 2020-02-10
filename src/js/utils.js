@@ -253,3 +253,17 @@ const createFile = (data, fileName, fileFormat) => {
     virtualLink.download = fileName + "." + fileFormat;
     virtualLink.click();
 }
+
+const resolveResponseJson = (json) => {
+    if (Object.entries(json).length === 0) {
+        return "It's save to proceed"
+    } 
+
+    let output = "Duplicate found: \n\n";
+
+    for (let key in json) {
+        output += key + ": " + json[key] + "\n";
+    }
+
+    return output += "\nAre you sure you want to proceed?";
+}

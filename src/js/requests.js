@@ -1,4 +1,4 @@
-const saveButton = (e) => {
+const checkForDuplicates = (e) => {
     let row = e.parentElement.parentElement;
 
     for (let cell of row.cells) {
@@ -8,6 +8,16 @@ const saveButton = (e) => {
         }
     }
 
+    return fetch(BASE + "/validate", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: assembleRowData(e)
+    }).then(r => r.json());
+}
+
+const saveButton = (e) => {
     fetch(BASE, {
         method: 'POST',
         headers: {
@@ -37,15 +47,6 @@ const saveButton = (e) => {
 }
 
 const updateButton = (e) => {
-    let row = e.parentElement.parentElement;
-
-    for (let cell of row.cells) {
-        if (cell.classList.contains("invalid")) {
-            warning();
-            return;
-        }
-    }
-
     fetch(BASE, {
         method: 'PUT',
         headers: {
