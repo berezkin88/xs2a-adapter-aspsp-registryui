@@ -68,22 +68,24 @@ function toggleButtons(e) {
 function greenButton(e) {
     let tableRow = e.parentElement.parentElement;
 
-    let isDuplicate; 
-    checkForDuplicates(e)
-    .then(response => isDuplicate = response)
-    .finally(() => {
-        if (tableRow.className) {
-            if (window.confirm(resolveResponseJson(isDuplicate))) {
-                saveButton(e);
-            }
-        } else {
-            if (window.confirm(resolveResponseJson(isDuplicate))) {
-                updateButton(e);
-            } else {
-                toggleButtons(e);
-            }
-        }
-    });
+    if (tableRow.className) {
+        let isDuplicate;
+        checkForDuplicates(e)
+            .then(response => isDuplicate = response)
+            .finally(() => {
+                if (window.confirm(resolveResponseJson(isDuplicate))) {
+                    saveButton(e);
+                }
+            });
+        return;
+    }
+
+
+    if (window.confirm(`Are you sure you want to update the aspsp?`)) {
+        updateButton(e);
+    } else {
+        toggleButtons(e);
+    }
 }
 
 function redButton(e) {

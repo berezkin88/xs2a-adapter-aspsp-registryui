@@ -255,11 +255,11 @@ const createFile = (data, fileName, fileFormat) => {
 }
 
 const resolveResponseJson = (json) => {
-    if (Object.entries(json).length === 0) {
-        return "It's save to proceed"
+    if (!json) {
+        return "It's save to proceed";
     } 
 
-    let output = "Duplicate found: \n\n";
+    let output = "Duplicate found: \n";
 
     for (let key in json) {
         output += key + ": " + json[key] + "\n";
