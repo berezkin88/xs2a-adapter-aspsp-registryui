@@ -223,11 +223,13 @@ const showSpinner = () => {
     const spinner = document.querySelector(".spinner");
     const verdict = document.querySelector(".verdict");
     const verdictReport = document.querySelector(".validation-report");
+    const duplicatesReport = document.querySelector(".duplicates-report");
     const merge = document.querySelector(".merge-request");
     const upload = document.querySelector(".upload-request");
 
     verdict.classList.add("hidden");
     verdictReport.classList.add("hidden");
+    duplicatesReport.classList.add("hidden");
     merge.classList.add("hidden");
     upload.classList.add("hidden");
 

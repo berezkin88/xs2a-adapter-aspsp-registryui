@@ -1,3 +1,5 @@
+"use strict";
+
 //=require globals.js
 //=require addEventListeners.js
 //=require validations.js
