@@ -90,7 +90,7 @@ const buildStringForDuplicates = (input) => {
             result += " " + element + ",";
         });
 
-        result = result.substr(0, result.length - 1);
+        result = result.substr(0, result.length - 1) + "\n";
         result += "\n";
     }
 
