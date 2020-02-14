@@ -91,7 +91,6 @@ const buildStringForDuplicates = (input) => {
         });
 
         result = result.substr(0, result.length - 1) + "\n";
-        result += "\n";
     }
 
     if (input[2]) {
